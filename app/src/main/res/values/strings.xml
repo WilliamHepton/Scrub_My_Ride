@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Scrub My Ride</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="homepage_fragment_label">Home Page Fragment</string>
+    <string name="washchoice_fragment_label">Wash Choice Fragment</string>
+    <string name="address_fragment_label">Address Choice Fragment</string>
+    <string name="cleanerchoice_fragment_label">Cleaner Choice Fragment</string>
+    <string name="date_fragment_label">Date Choice Fragment</string>
+
+    <string name="btn_next">Next</string>
+    <string name="btn_previous">Previous</string>
+    <string name="btn_close">Close</string>
+
+    <string name="txt_appDesc">Welcome to Scrub My Ride</string>
+    <string name="btn_booking">Book a car wash today!</string>
+    <string name="btn_login">Login as a cleaner</string>
+    <string name="btn_signup">Sign up as a cleaner</string>
+    <string name="img_logo">Scrub My Ride Logo</string>
+
+    <string name="txt_washType">What type of car wash are you looking for?</string>
+    <string name="txt_outsideWash">Outside wash</string>
+    <string name="txt_outInWash">Outside wash and Inside clean</string>
+
+    <string name="txt_postCode">Find your address by postcode</string>
+    <string name="input_postCode">Enter your postcode here</string>
+    <string name="txt_selectAddress">Select your address from the list</string>
+
+    <string name="txt_selectCleaners">Choose a cleaner from the ones available below</string>
+
+    <string name="txt_selectDate">Select a date and time for the cleaner to come</string>
+
+    <string name="txt_selectPayment">Select a payment method</string>
+    <string name="btn_pay">Pay</string>
+
+</resources>

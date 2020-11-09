@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomePage">
+
+    <fragment
+        android:id="@+id/Cleaner_Login"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        tools:layout="@layout/f_cleaner_login">
+        <action
+            android:id="@+id/action_Cleaner_Login_to_Cleaner_Page"
+            app:destination="@id/Cleaner_Page" />
+        <action
+            android:id="@+id/action_Cleaner_Login_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/Cleaner_Page"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        tools:layout="@layout/f_cleaner_page">
+        <action
+            android:id="@+id/action_Cleaner_Page_to_Cleaner_Work"
+            app:destination="@id/Cleaner_Work" />
+        <action
+            android:id="@+id/action_Cleaner_Page_to_Cleaner_Details"
+            app:destination="@id/Cleaner_Details" />
+        <action
+            android:id="@+id/action_Cleaner_Page_to_Cleaner_Login"
+            app:destination="@id/Cleaner_Login" />
+    </fragment>
+    <fragment
+        android:id="@+id/Cleaner_Work"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        tools:layout="@layout/f_cleaner_work">
+        <action
+            android:id="@+id/action_Cleaner_Work_to_Cleaner_Page"
+            app:destination="@id/Cleaner_Page" />
+    </fragment>
+    <fragment
+        android:id="@+id/Cleaner_Details"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        tools:layout="@layout/f_cleaner_details">
+        <action
+            android:id="@+id/action_Cleaner_Details_to_Cleaner_Page"
+            app:destination="@id/Cleaner_Page" />
+    </fragment>
+    <fragment
+        android:id="@+id/HomePage"
+        android:name="com.example.scrubmyride.HomePageFragment"
+        android:label="@string/homepage_fragment_label"
+        tools:layout="@layout/f_home_page">
+        <action
+            android:id="@+id/action_HomePage_to_Booking_WashChoice"
+            app:destination="@id/Booking_WashChoice" />
+        <action
+            android:id="@+id/action_HomePage_to_Cleaner_Login"
+            app:destination="@id/Cleaner_Login" />
+        <action
+            android:id="@+id/action_HomePage_to_Cleaner_Signup"
+            app:destination="@id/Cleaner_Signup" />
+    </fragment>
+    <fragment
+        android:id="@+id/Cleaner_Signup"
+        android:name="com.example.scrubmyride.HomePageFragment"
+        tools:layout="@layout/f_cleaner_signup">
+        <action
+            android:id="@+id/action_Cleaner_Signup_to_Cleaner_Signup2"
+            app:destination="@id/Cleaner_Signup2" />
+        <action
+            android:id="@+id/action_Cleaner_Signup_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/Cleaner_Signup2"
+        android:name="com.example.scrubmyride.HomePageFragment"
+        tools:layout="@layout/f_cleaner_signup2">
+        <action
+            android:id="@+id/action_Cleaner_Signup2_to_Cleaner_Page"
+            app:destination="@id/Cleaner_Page" />
+    </fragment>
+    <fragment
+        android:id="@+id/Booking_WashChoice"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:label="@string/washchoice_fragment_label"
+        tools:layout="@layout/f_booking_wash_choice">
+        <action
+            android:id="@+id/action_Booking_WashChoice_to_Booking_Address"
+            app:destination="@id/Booking_Address" />
+        <action
+            android:id="@+id/action_Booking_WashChoice_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/Booking_Address"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:label="@string/address_fragment_label"
+        tools:layout="@layout/f_booking_address">
+        <action
+            android:id="@+id/action_Booking_Address_to_Booking_CleanerChoice"
+            app:destination="@id/Booking_CleanerChoice" />
+        <action
+            android:id="@+id/action_Booking_Address_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/Booking_Date"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:label="@string/date_fragment_label"
+        tools:layout="@layout/f_booking_date">
+        <action
+            android:id="@+id/action_Booking_Date_to_Booking_Payment"
+            app:destination="@id/Booking_Payment" />
+        <action
+            android:id="@+id/action_Booking_Date_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/Booking_CleanerChoice"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:label="@string/cleanerchoice_fragment_label"
+        tools:layout="@layout/f_booking_cleaner_choice">
+        <action
+            android:id="@+id/action_Booking_CleanerChoice_to_Booking_Date"
+            app:destination="@id/Booking_Date" />
+        <action
+            android:id="@+id/action_Booking_CleanerChoice_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/Booking_Payment"
+        android:name="com.example.scrubmyride.WashChoiceFragment"
+        tools:layout="@layout/f_booking_payment">
+        <action
+            android:id="@+id/action_Booking_Payment_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+</navigation>
