@@ -7,15 +7,18 @@
     <string name="address_fragment_label">Address Choice Fragment</string>
     <string name="cleanerchoice_fragment_label">Cleaner Choice Fragment</string>
     <string name="date_fragment_label">Date Choice Fragment</string>
+    <string name="payment_label">Payment Fragment</string>
 
     <string name="btn_next">Next</string>
     <string name="btn_previous">Previous</string>
     <string name="btn_close">Close</string>
+    <string name="btn_logout">Sign out</string>
 
     <string name="txt_appDesc">Welcome to Scrub My Ride</string>
     <string name="btn_booking">Book a car wash today!</string>
-    <string name="btn_login">Login as a cleaner</string>
+    <string name="btn_signin">Sign in as a cleaner</string>
     <string name="btn_signup">Sign up as a cleaner</string>
+    <string name="btn_login">Login</string>
     <string name="img_logo">Scrub My Ride Logo</string>
 
     <string name="txt_washType">What type of car wash are you looking for?</string>
@@ -32,5 +35,10 @@
 
     <string name="txt_selectPayment">Select a payment method</string>
     <string name="btn_pay">Pay</string>
+
+    <string name="txt_forgotPassword">Forgot password?</string>
+    <string name="input_phoneNumber">Enter phone number</string>
+    <string name="input_password">Enter password</string>
+
 
 </resources>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/Cleaner_Login"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.CleanerLoginFragment"
         tools:layout="@layout/f_cleaner_login">
         <action
             android:id="@+id/action_Cleaner_Login_to_Cleaner_Page"
@@ -16,9 +16,10 @@
             android:id="@+id/action_Cleaner_Login_to_HomePage"
             app:destination="@id/HomePage" />
     </fragment>
+
     <fragment
         android:id="@+id/Cleaner_Page"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.CleanerPageFragment"
         tools:layout="@layout/f_cleaner_page">
         <action
             android:id="@+id/action_Cleaner_Page_to_Cleaner_Work"
@@ -32,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Work"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.CleanerWorkFragment"
         tools:layout="@layout/f_cleaner_work">
         <action
             android:id="@+id/action_Cleaner_Work_to_Cleaner_Page"
@@ -40,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Details"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.CleanerDetailsFragment"
         tools:layout="@layout/f_cleaner_details">
         <action
             android:id="@+id/action_Cleaner_Details_to_Cleaner_Page"
@@ -63,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Signup"
-        android:name="com.example.scrubmyride.HomePageFragment"
+        android:name="com.example.scrubmyride.CleanerSignupFragment"
         tools:layout="@layout/f_cleaner_signup">
         <action
             android:id="@+id/action_Cleaner_Signup_to_Cleaner_Signup2"
@@ -74,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Signup2"
-        android:name="com.example.scrubmyride.HomePageFragment"
+        android:name="com.example.scrubmyride.CleanerSignupFragment"
         tools:layout="@layout/f_cleaner_signup2">
         <action
             android:id="@+id/action_Cleaner_Signup2_to_Cleaner_Page"
@@ -94,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_Address"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.BookingAddressFragment"
         android:label="@string/address_fragment_label"
         tools:layout="@layout/f_booking_address">
         <action
@@ -106,7 +107,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_Date"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.BookingDateFragment"
         android:label="@string/date_fragment_label"
         tools:layout="@layout/f_booking_date">
         <action
@@ -118,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_CleanerChoice"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.CleanerChoiceFragment"
         android:label="@string/cleanerchoice_fragment_label"
         tools:layout="@layout/f_booking_cleaner_choice">
         <action
@@ -130,7 +131,8 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_Payment"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.PaymentFragment"
+        android:label="@string/payment_label"
         tools:layout="@layout/f_booking_payment">
         <action
             android:id="@+id/action_Booking_Payment_to_HomePage"

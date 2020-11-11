@@ -13,13 +13,15 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 public class BookingAddressFragment extends Fragment {
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.f_booking_address, container, false);
+        View view = inflater.inflate(R.layout.f_booking_address, container, false);
+        return view;
     }
 
     @Override
@@ -33,6 +35,14 @@ public class BookingAddressFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.action_Booking_Address_to_Booking_CleanerChoice);
+            }
+        });
+
+        Button btn_close = view.findViewById((R.id.btn_close));
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_Booking_Address_to_HomePage);
             }
         });
     }

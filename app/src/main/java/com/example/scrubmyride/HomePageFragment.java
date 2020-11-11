@@ -38,10 +38,7 @@ public class HomePageFragment extends Fragment {
         btn_booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // navController.navigate(R.id.action_HomePage_to_Booking_WashChoice);
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new WashChoiceFragment());
-                fr.commit();
+                navController.navigate(R.id.action_HomePage_to_Booking_WashChoice);
             }
         });
     }

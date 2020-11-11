@@ -36,9 +36,7 @@ public class WashChoiceFragment extends Fragment {
         btn_outsideWash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (navController.getCurrentDestination().getId() == R.id.Booking_WashChoice) {
-                    navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address);
-                }
+                navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address);
             }
         });
 
@@ -46,15 +44,12 @@ public class WashChoiceFragment extends Fragment {
         btn_outInWash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address);
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new BookingAddressFragment());
-                fr.commit();
+                navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address);
             }
         });
 
         Button btn_close = view.findViewById((R.id.btn_close));
-        btn_outInWash.setOnClickListener(new View.OnClickListener() {
+        btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.action_Booking_WashChoice_to_HomePage);

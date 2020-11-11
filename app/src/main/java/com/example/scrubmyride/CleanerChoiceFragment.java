@@ -35,5 +35,13 @@ public class CleanerChoiceFragment extends Fragment {
                 navController.navigate(R.id.action_Booking_CleanerChoice_to_Booking_Date);
             }
         });
+
+        Button btn_close = view.findViewById((R.id.btn_close));
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_Booking_CleanerChoice_to_HomePage);
+            }
+        });
     }
 }
