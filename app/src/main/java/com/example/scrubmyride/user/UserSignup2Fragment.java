@@ -1,4 +1,4 @@
-package com.example.scrubmyride;
+package com.example.scrubmyride.user;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-public class BookingDateFragment extends Fragment {
+import com.example.scrubmyride.R;
+
+public class UserSignup2Fragment extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.f_booking_date, container, false);
+        View view = inflater.inflate(R.layout.f_user_signup2, container, false);
+        return view;
     }
 
     @Override
@@ -28,19 +31,11 @@ public class BookingDateFragment extends Fragment {
 
         final NavController navController = Navigation.findNavController(view);
 
-        Button btn_next = view.findViewById((R.id.btn_bookingDate_next));
+        Button btn_next = view.findViewById((R.id.btn_next));
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_Date_to_Booking_Payment);
-            }
-        });
-
-        Button btn_close = view.findViewById((R.id.btn_close));
-        btn_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_Date_to_HomePage);
+                navController.navigate(R.id.action_userSignup2Fragment_to_userPageFragment);
             }
         });
     }

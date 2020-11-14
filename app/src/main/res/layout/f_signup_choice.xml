@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".booking.WashChoiceFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,21 +32,23 @@
         android:gravity="center|center_horizontal|center_vertical"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_myWork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_myWork" />
-
-        <CalendarView
-            android:id="@+id/calendarView2"
+        <ImageView
+            android:id="@+id/img_logo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/img_logo"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
 
         <Button
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_userSignup"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@string/btn_save" />
+            android:text="@string/btn_userSignup" />
+
+        <Button
+            android:id="@+id/btn_cleanerSignup"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_cleanerSignup" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

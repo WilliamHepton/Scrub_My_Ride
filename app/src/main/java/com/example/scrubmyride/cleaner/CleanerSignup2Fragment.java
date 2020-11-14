@@ -1,4 +1,4 @@
-package com.example.scrubmyride;
+package com.example.scrubmyride.cleaner;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-public class CleanerChoiceFragment extends Fragment {
+import com.example.scrubmyride.R;
+
+public class CleanerSignup2Fragment extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.f_booking_cleaner_choice, container, false);
+        View view = inflater.inflate(R.layout.f_cleaner_signup2, container, false);
+        return view;
     }
 
     @Override
@@ -28,19 +31,11 @@ public class CleanerChoiceFragment extends Fragment {
 
         final NavController navController = Navigation.findNavController(view);
 
-        Button btn_next = view.findViewById((R.id.btn_bookingCleanerChoice_next));
+        Button btn_next = view.findViewById((R.id.btn_next));
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_CleanerChoice_to_Booking_Date);
-            }
-        });
-
-        Button btn_close = view.findViewById((R.id.btn_close));
-        btn_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_CleanerChoice_to_HomePage);
+                navController.navigate(R.id.action_Cleaner_Signup2_to_Cleaner_Page);
             }
         });
     }

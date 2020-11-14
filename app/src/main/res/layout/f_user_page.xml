@@ -47,12 +47,6 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btn_scheduleWork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_scheduleWork" />
-
-        <Button
             android:id="@+id/btn_editDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

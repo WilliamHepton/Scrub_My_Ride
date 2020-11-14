@@ -9,22 +9,17 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.material.navigation.NavigationView;
-
-public class HomePageFragment extends Fragment {
+public class HomeLoginFragment extends Fragment {
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f_home_page, container, false);
+        View view = inflater.inflate(R.layout.f_login_choice, container, false);
         return view;
     }
 
@@ -34,27 +29,27 @@ public class HomePageFragment extends Fragment {
 
         final NavController navController = Navigation.findNavController(view);
 
-        Button btn_booking = view.findViewById((R.id.btn_booking));
-        btn_booking.setOnClickListener(new View.OnClickListener() {
+        Button btn_close = view.findViewById((R.id.btn_close));
+        btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_HomePage_to_Booking_WashChoice);
+                navController.navigate(R.id.action_homeLoginFragment_to_HomePage);
             }
         });
 
-        Button btn_login = view.findViewById((R.id.btn_login));
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        Button btn_loginUser = view.findViewById((R.id.btn_userLogin));
+        btn_loginUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_HomePage_to_homeLoginFragment);
+                navController.navigate(R.id.action_homeLoginFragment_to_userLoginFragment);
             }
         });
 
-        Button btn_signUp = view.findViewById((R.id.btn_signupPage));
-        btn_signUp.setOnClickListener(new View.OnClickListener() {
+        Button btn_loginCleaner = view.findViewById((R.id.btn_cleanerLogin));
+        btn_loginCleaner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_HomePage_to_homeSignupFragment);
+                navController.navigate(R.id.action_homeLoginFragment_to_Cleaner_Login);
             }
         });
     }

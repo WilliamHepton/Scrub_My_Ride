@@ -13,13 +13,20 @@
     <string name="btn_previous">Previous</string>
     <string name="btn_close">Close</string>
     <string name="btn_logout">Sign out</string>
+    <string name="btn_save">Save</string>
 
     <string name="txt_appDesc">Welcome to Scrub My Ride</string>
     <string name="btn_booking">Book a car wash today!</string>
-    <string name="btn_signin">Sign in as a cleaner</string>
-    <string name="btn_signup">Sign up as a cleaner</string>
+    <string name="btn_signin">Sign in</string>
+    <string name="btn_signup">Sign up</string>
     <string name="btn_login">Login</string>
     <string name="img_logo">Scrub My Ride Logo</string>
+
+    <string name="btn_cleanerLogin">Login as a cleaner</string>
+    <string name="btn_userLogin">Login as a user</string>
+
+    <string name="btn_cleanerSignup">Sign up as a cleaner</string>
+    <string name="btn_userSignup">Sign up as a user</string>
 
     <string name="txt_washType">What type of car wash are you looking for?</string>
     <string name="txt_outsideWash">Outside wash</string>
@@ -37,8 +44,29 @@
     <string name="btn_pay">Pay</string>
 
     <string name="txt_forgotPassword">Forgot password?</string>
-    <string name="input_phoneNumber">Enter phone number</string>
-    <string name="input_password">Enter password</string>
+    <string name="input_phoneNumberEnter">Enter your phone number</string>
+    <string name="input_passwordEnter">Enter your password</string>
+
+    <string name="txt_name">User name</string>
+    <string name="txt_timetable">My time table</string>
+    <string name="btn_scheduleWork">Schedule Work</string>
+    <string name="btn_editDetails">Edit my details</string>
+
+    <string name="txt_becomeWasher">Become a car washer today!</string>
+    <string name="input_name">Name</string>
+    <string name="input_phoneNumber">Phone number</string>
+    <string name="input_email">Email</string>
+    <string name="input_password">Password</string>
+    <string name="input_passwordConfirm">Confirm passowrd</string>
+
+    <string name="txt_myDetails">My details</string>
+
+    <string name="txt_myWork">My work</string>
+
+    <string name="txt_desc">Write a short description about yourself</string>
+    <string name="input_desc">Description</string>
+    <string name="txt_verifyEmail">Please verify your email so you can start taking on bookings!</string>
+
 
 
 </resources>

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/Cleaner_Login"
-        android:name="com.example.scrubmyride.CleanerLoginFragment"
+        android:name="com.example.scrubmyride.cleaner.CleanerLoginFragment"
         tools:layout="@layout/f_cleaner_login">
         <action
             android:id="@+id/action_Cleaner_Login_to_Cleaner_Page"
             app:destination="@id/Cleaner_Page" />
         <action
-            android:id="@+id/action_Cleaner_Login_to_HomePage"
-            app:destination="@id/HomePage" />
+            android:id="@+id/action_Cleaner_Login_to_homeLoginFragment"
+            app:destination="@id/homeLoginFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/Cleaner_Page"
-        android:name="com.example.scrubmyride.CleanerPageFragment"
+        android:name="com.example.scrubmyride.cleaner.CleanerPageFragment"
         tools:layout="@layout/f_cleaner_page">
         <action
             android:id="@+id/action_Cleaner_Page_to_Cleaner_Work"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Work"
-        android:name="com.example.scrubmyride.CleanerWorkFragment"
+        android:name="com.example.scrubmyride.cleaner.WorkFragment"
         tools:layout="@layout/f_cleaner_work">
         <action
             android:id="@+id/action_Cleaner_Work_to_Cleaner_Page"
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Details"
-        android:name="com.example.scrubmyride.CleanerDetailsFragment"
+        android:name="com.example.scrubmyride.cleaner.CleanerDetailsFragment"
         tools:layout="@layout/f_cleaner_details">
         <action
             android:id="@+id/action_Cleaner_Details_to_Cleaner_Page"
@@ -56,26 +56,26 @@
             android:id="@+id/action_HomePage_to_Booking_WashChoice"
             app:destination="@id/Booking_WashChoice" />
         <action
-            android:id="@+id/action_HomePage_to_Cleaner_Login"
-            app:destination="@id/Cleaner_Login" />
+            android:id="@+id/action_HomePage_to_homeLoginFragment"
+            app:destination="@id/homeLoginFragment" />
         <action
-            android:id="@+id/action_HomePage_to_Cleaner_Signup"
-            app:destination="@id/Cleaner_Signup" />
+            android:id="@+id/action_HomePage_to_homeSignupFragment"
+            app:destination="@id/homeSignupFragment" />
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Signup"
-        android:name="com.example.scrubmyride.CleanerSignupFragment"
+        android:name="com.example.scrubmyride.cleaner.CleanerSignupFragment"
         tools:layout="@layout/f_cleaner_signup">
         <action
             android:id="@+id/action_Cleaner_Signup_to_Cleaner_Signup2"
             app:destination="@id/Cleaner_Signup2" />
         <action
-            android:id="@+id/action_Cleaner_Signup_to_HomePage"
-            app:destination="@id/HomePage" />
+            android:id="@+id/action_Cleaner_Signup_to_homeSignupFragment"
+            app:destination="@id/homeSignupFragment" />
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Signup2"
-        android:name="com.example.scrubmyride.CleanerSignupFragment"
+        android:name="com.example.scrubmyride.cleaner.CleanerSignup2Fragment"
         tools:layout="@layout/f_cleaner_signup2">
         <action
             android:id="@+id/action_Cleaner_Signup2_to_Cleaner_Page"
@@ -83,7 +83,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_WashChoice"
-        android:name="com.example.scrubmyride.WashChoiceFragment"
+        android:name="com.example.scrubmyride.booking.WashChoiceFragment"
         android:label="@string/washchoice_fragment_label"
         tools:layout="@layout/f_booking_wash_choice">
         <action
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_Address"
-        android:name="com.example.scrubmyride.BookingAddressFragment"
+        android:name="com.example.scrubmyride.booking.AddressChoiceFragment"
         android:label="@string/address_fragment_label"
         tools:layout="@layout/f_booking_address">
         <action
@@ -107,7 +107,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_Date"
-        android:name="com.example.scrubmyride.BookingDateFragment"
+        android:name="com.example.scrubmyride.booking.DateChoiceFragment"
         android:label="@string/date_fragment_label"
         tools:layout="@layout/f_booking_date">
         <action
@@ -119,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_CleanerChoice"
-        android:name="com.example.scrubmyride.CleanerChoiceFragment"
+        android:name="com.example.scrubmyride.booking.CleanerChoiceFragment"
         android:label="@string/cleanerchoice_fragment_label"
         tools:layout="@layout/f_booking_cleaner_choice">
         <action
@@ -131,11 +131,95 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_Payment"
-        android:name="com.example.scrubmyride.PaymentFragment"
+        android:name="com.example.scrubmyride.booking.PaymentFragment"
         android:label="@string/payment_label"
         tools:layout="@layout/f_booking_payment">
         <action
             android:id="@+id/action_Booking_Payment_to_HomePage"
             app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/userSignupFragment"
+        android:name="com.example.scrubmyride.user.UserSignupFragment"
+        android:label="UserSignupFragment"
+        tools:layout="@layout/f_user_signup">
+        <action
+            android:id="@+id/action_userSignupFragment_to_userSignup2Fragment"
+            app:destination="@id/userSignup2Fragment" />
+        <action
+            android:id="@+id/action_userSignupFragment_to_homeSignupFragment"
+            app:destination="@id/homeSignupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.example.scrubmyride.user.UserDetailsFragment"
+        android:label="UserDetailsFragment"
+        tools:layout="@layout/f_user_details">
+        <action
+            android:id="@+id/action_userDetailsFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userSignup2Fragment"
+        android:name="com.example.scrubmyride.user.UserSignup2Fragment"
+        android:label="UserSignup2Fragment"
+        tools:layout="@layout/f_user_signup2">
+        <action
+            android:id="@+id/action_userSignup2Fragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userPageFragment"
+        android:name="com.example.scrubmyride.user.UserPageFragment"
+        android:label="UserPageFragment"
+        tools:layout="@layout/f_user_page">
+        <action
+            android:id="@+id/action_userPageFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+        <action
+            android:id="@+id/action_userPageFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeLoginFragment"
+        android:name="com.example.scrubmyride.HomeLoginFragment"
+        android:label="HomeLoginFragment"
+        tools:layout="@layout/f_login_choice">
+        <action
+            android:id="@+id/action_homeLoginFragment_to_Cleaner_Login"
+            app:destination="@id/Cleaner_Login" />
+        <action
+            android:id="@+id/action_homeLoginFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
+        <action
+            android:id="@+id/action_homeLoginFragment_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeSignupFragment"
+        android:name="com.example.scrubmyride.HomeSignupFragment"
+        android:label="HomeSignupFragment"
+        tools:layout="@layout/f_signup_choice">
+        <action
+            android:id="@+id/action_homeSignupFragment_to_Cleaner_Signup"
+            app:destination="@id/Cleaner_Signup" />
+        <action
+            android:id="@+id/action_homeSignupFragment_to_userSignupFragment"
+            app:destination="@id/userSignupFragment" />
+        <action
+            android:id="@+id/action_homeSignupFragment_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/userLoginFragment"
+        android:name="com.example.scrubmyride.user.UserLoginFragment"
+        android:label="UserLoginFragment"
+        tools:layout="@layout/f_user_login">
+        <action
+            android:id="@+id/action_userLoginFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+        <action
+            android:id="@+id/action_userLoginFragment_to_homeLoginFragment"
+            app:destination="@id/homeLoginFragment" />
     </fragment>
 </navigation>
