@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center|top"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Space
             android:layout_width="253dp"
@@ -35,6 +36,8 @@
         android:layout_height="match_parent"
         android:gravity="center|center_horizontal|center_vertical"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="62dp">
 
         <TextView
@@ -61,10 +64,30 @@
             android:layout_marginBottom="30dp"
             android:text="@string/txt_selectAddress" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_addressList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/s_addressList"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp" />
+
+        <TextView
+            android:id="@+id/txt_checkAddress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/txt_checkAddress" />
+
+        <EditText
+            android:id="@+id/input_address"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="200dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/input_address"
+            android:inputType="textMultiLine" />
 
     </LinearLayout>
 

@@ -33,7 +33,7 @@
     <string name="txt_outInWash">Outside wash and Inside clean</string>
 
     <string name="txt_postCode">Find your address by postcode</string>
-    <string name="input_postCode">Enter your postcode here</string>
+    <string name="input_enterPostCode">Enter your postcode here</string>
     <string name="txt_selectAddress">Select your address from the list</string>
 
     <string name="txt_selectCleaners">Choose a cleaner from the ones available below</string>
@@ -46,6 +46,7 @@
     <string name="txt_forgotPassword">Forgot password?</string>
     <string name="input_phoneNumberEnter">Enter your phone number</string>
     <string name="input_passwordEnter">Enter your password</string>
+    <string name="input_address">Enter your address</string>
 
     <string name="txt_name">User name</string>
     <string name="txt_timetable">My time table</string>
@@ -53,15 +54,30 @@
     <string name="btn_editDetails">Edit my details</string>
 
     <string name="txt_becomeWasher">Become a car washer today!</string>
-    <string name="input_name">Name</string>
+    <string name="input_firstName">First name</string>
+    <string name="input_lastName">Last name</string>
     <string name="input_phoneNumber">Phone number</string>
     <string name="input_email">Email</string>
+    <string name="input_postCode">Post Code</string>
     <string name="input_password">Password</string>
     <string name="input_passwordConfirm">Confirm passowrd</string>
 
+    <string name="txt_checkAddress">Edit or verify the address below</string>
+
     <string name="txt_myDetails">My details</string>
 
-    <string name="txt_myWork">My work</string>
+    <string name="txt_scheduleCalendar">Schedule my calendar</string>
+    <string name="txt_chooseWorkingHours">Choose your working hours</string>
+    <string name="txt_monday">Mon</string>
+    <string name="txt_tuesday">Tue</string>
+    <string name="txt_wednesday">Wed</string>
+    <string name="txt_thursday">Thu</string>
+    <string name="txt_friday">Fri</string>
+    <string name="txt_saturday">Sat</string>
+    <string name="txt_sunday">Sun</string>
+    <string name="txt_addDate">Add working day schedule</string>
+    <string name="txt_timeStart">Start shift</string>
+    <string name="txt_timeEnd">End shift</string>
 
     <string name="txt_desc">Write a short description about yourself</string>
     <string name="input_desc">Description</string>

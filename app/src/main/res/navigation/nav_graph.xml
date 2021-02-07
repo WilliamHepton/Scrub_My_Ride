@@ -30,14 +30,20 @@
         <action
             android:id="@+id/action_Cleaner_Page_to_Cleaner_Login"
             app:destination="@id/Cleaner_Login" />
+        <argument
+            android:name="userID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Work"
-        android:name="com.example.scrubmyride.cleaner.WorkFragment"
+        android:name="com.example.scrubmyride.cleaner.CleanerWorkFragment"
         tools:layout="@layout/f_cleaner_work">
         <action
             android:id="@+id/action_Cleaner_Work_to_Cleaner_Page"
             app:destination="@id/Cleaner_Page" />
+        <argument
+            android:name="userID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Details"
@@ -99,11 +105,14 @@
         android:label="@string/address_fragment_label"
         tools:layout="@layout/f_booking_address">
         <action
-            android:id="@+id/action_Booking_Address_to_Booking_CleanerChoice"
-            app:destination="@id/Booking_CleanerChoice" />
-        <action
             android:id="@+id/action_Booking_Address_to_HomePage"
             app:destination="@id/HomePage" />
+        <action
+            android:id="@+id/action_Booking_Address_to_Booking_Date"
+            app:destination="@id/Booking_Date" />
+        <argument
+            android:name="washTypeID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/Booking_Date"
@@ -111,11 +120,17 @@
         android:label="@string/date_fragment_label"
         tools:layout="@layout/f_booking_date">
         <action
-            android:id="@+id/action_Booking_Date_to_Booking_Payment"
-            app:destination="@id/Booking_Payment" />
-        <action
             android:id="@+id/action_Booking_Date_to_HomePage"
             app:destination="@id/HomePage" />
+        <action
+            android:id="@+id/action_Booking_Date_to_Booking_CleanerChoice"
+            app:destination="@id/Booking_CleanerChoice" />
+        <argument
+            android:name="address"
+            app:argType="string" />
+        <argument
+            android:name="washTypeID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/Booking_CleanerChoice"
@@ -123,11 +138,23 @@
         android:label="@string/cleanerchoice_fragment_label"
         tools:layout="@layout/f_booking_cleaner_choice">
         <action
-            android:id="@+id/action_Booking_CleanerChoice_to_Booking_Date"
-            app:destination="@id/Booking_Date" />
-        <action
             android:id="@+id/action_Booking_CleanerChoice_to_HomePage"
             app:destination="@id/HomePage" />
+        <action
+            android:id="@+id/action_Booking_CleanerChoice_to_Booking_Payment"
+            app:destination="@id/Booking_Payment" />
+        <argument
+            android:name="selectedDateStart"
+            app:argType="string" />
+        <argument
+            android:name="selectedDateEnd"
+            app:argType="string" />
+        <argument
+            android:name="address"
+            app:argType="string" />
+        <argument
+            android:name="washTypeID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/Booking_Payment"
@@ -137,6 +164,12 @@
         <action
             android:id="@+id/action_Booking_Payment_to_HomePage"
             app:destination="@id/HomePage" />
+        <argument
+            android:name="dateTimeStart"
+            app:argType="string" />
+        <argument android:name="cleanerID" />
+        <argument android:name="customerID" />
+        <argument android:name="washTypeID" />
     </fragment>
     <fragment
         android:id="@+id/userSignupFragment"

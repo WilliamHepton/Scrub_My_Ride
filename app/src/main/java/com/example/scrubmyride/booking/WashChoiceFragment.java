@@ -18,6 +18,9 @@ import com.example.scrubmyride.R;
 
 public class WashChoiceFragment extends Fragment {
 
+    int washTypeID;
+    Bundle bundle = new Bundle();
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -38,7 +41,9 @@ public class WashChoiceFragment extends Fragment {
         btn_outsideWash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address);
+                washTypeID = 1;
+                bundle.putInt("washTypeID", washTypeID);
+                navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address, bundle);
             }
         });
 
@@ -46,7 +51,9 @@ public class WashChoiceFragment extends Fragment {
         btn_outInWash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address);
+                washTypeID = 2;
+                bundle.putInt("washTypeID", washTypeID);
+                navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address, bundle);
             }
         });
 

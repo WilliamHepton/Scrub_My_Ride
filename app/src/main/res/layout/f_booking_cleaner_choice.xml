@@ -40,10 +40,11 @@
             android:layout_marginBottom="30dp"
             android:text="@string/txt_selectCleaners" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_cleanersList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/s_cleanersList"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog" />
 
     </LinearLayout>
 
