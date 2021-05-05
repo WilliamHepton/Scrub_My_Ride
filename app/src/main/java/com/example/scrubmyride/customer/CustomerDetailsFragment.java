@@ -1,4 +1,4 @@
-package com.example.scrubmyride.user;
+package com.example.scrubmyride.customer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,14 +14,15 @@ import androidx.navigation.Navigation;
 
 import com.example.scrubmyride.R;
 
-public class UserSignup2Fragment extends Fragment {
+public class CustomerDetailsFragment extends Fragment {
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f_user_signup2, container, false);
+        View view = inflater.inflate(R.layout.f_customer_details, container, false);
         return view;
     }
 
@@ -31,11 +32,19 @@ public class UserSignup2Fragment extends Fragment {
 
         final NavController navController = Navigation.findNavController(view);
 
-        Button btn_next = view.findViewById((R.id.btn_next));
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        Button btn_save = view.findViewById((R.id.btn_save));
+        btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_userSignup2Fragment_to_userPageFragment);
+                navController.navigate(R.id.action_userDetailsFragment_to_userPageFragment);
+            }
+        });
+
+        Button btn_close = view.findViewById((R.id.btn_close));
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_userDetailsFragment_to_userPageFragment);
             }
         });
     }

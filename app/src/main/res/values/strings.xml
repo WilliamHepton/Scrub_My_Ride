@@ -15,8 +15,8 @@
     <string name="btn_logout">Sign out</string>
     <string name="btn_save">Save</string>
 
-    <string name="txt_appDesc">Welcome to Scrub My Ride</string>
-    <string name="btn_booking">Book a car wash today!</string>
+    <string name="txt_appDesc">Scrub My Ride</string>
+    <string name="btn_booking">Book a car wash</string>
     <string name="btn_signin">Sign in</string>
     <string name="btn_signup">Sign up</string>
     <string name="btn_login">Login</string>
@@ -27,30 +27,37 @@
 
     <string name="btn_cleanerSignup">Sign up as a cleaner</string>
     <string name="btn_userSignup">Sign up as a user</string>
+    <string name="txt_becomeCustomer">Become a customer today!</string>
 
+
+    <string name="txt_carReg">Car registration number</string>
+    <string name="txt_carRegHint">Enter your car registration number here</string>
     <string name="txt_washType">What type of car wash are you looking for?</string>
     <string name="txt_outsideWash">Outside wash</string>
     <string name="txt_outInWash">Outside wash and Inside clean</string>
+    <string name="txt_insideWash">Inside clean</string>
 
     <string name="txt_postCode">Find your address by postcode</string>
     <string name="input_enterPostCode">Enter your postcode here</string>
     <string name="txt_selectAddress">Select your address from the list</string>
 
     <string name="txt_selectCleaners">Choose a cleaner from the ones available below</string>
+    <string name="txt_selectTime">Select a timeframe for when the cleaner can come</string>
 
     <string name="txt_selectDate">Select a date and time for the cleaner to come</string>
 
-    <string name="txt_selectPayment">Select a payment method</string>
-    <string name="btn_pay">Pay</string>
+    <string name="txt_selectPayment">Review your booking</string>
+    <string name="btn_pay">Book</string>
 
     <string name="txt_forgotPassword">Forgot password?</string>
     <string name="input_phoneNumberEnter">Enter your phone number</string>
     <string name="input_passwordEnter">Enter your password</string>
     <string name="input_address">Enter your address</string>
 
-    <string name="txt_name">User name</string>
-    <string name="txt_timetable">My time table</string>
+    <string name="txt_name"> </string>
+    <string name="txt_timetable">My current bookings</string>
     <string name="btn_scheduleWork">Schedule Work</string>
+    <string name="btn_setWashType">Set your fees</string>
     <string name="btn_editDetails">Edit my details</string>
 
     <string name="txt_becomeWasher">Become a car washer today!</string>
@@ -59,10 +66,13 @@
     <string name="input_phoneNumber">Phone number</string>
     <string name="input_email">Email</string>
     <string name="input_postCode">Post Code</string>
+    <string name="input_carReg">Car registration number</string>
     <string name="input_password">Password</string>
     <string name="input_passwordConfirm">Confirm passowrd</string>
 
     <string name="txt_checkAddress">Edit or verify the address below</string>
+
+    <string name="txt_poundSign">£</string>
 
     <string name="txt_myDetails">My details</string>
 

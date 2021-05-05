@@ -9,15 +9,12 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.google.android.material.navigation.NavigationView;
 
 public class HomePageFragment extends Fragment {
+
+    Bundle bundleSend = new Bundle();
 
     @Override
     public View onCreateView(
@@ -38,7 +35,8 @@ public class HomePageFragment extends Fragment {
         btn_booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_HomePage_to_Booking_WashChoice);
+                bundleSend.putInt("customerID", 0);
+                navController.navigate(R.id.action_HomePage_to_Booking_WashChoice, bundleSend);
             }
         });
 

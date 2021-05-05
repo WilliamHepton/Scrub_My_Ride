@@ -21,7 +21,8 @@ import com.example.scrubmyride.R;
 public class CleanerLoginFragment extends Fragment {
 
     EditText PhoneNumberET, PasswordET;
-    String userID;
+    int userID;
+    Bundle bundleSend;
 
 
     @Override
@@ -54,10 +55,10 @@ public class CleanerLoginFragment extends Fragment {
                         @Override
                         public void processFinish(Object output) {
                             if (!"-1".equals((String) output)) {
-                                userID = output.toString();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("userID", userID);
-                                navController.navigate(R.id.action_Cleaner_Login_to_Cleaner_Page, bundle);
+                                userID = Integer.parseInt(output.toString());
+                                bundleSend = new Bundle();
+                                bundleSend.putInt("userID", userID);
+                                navController.navigate(R.id.action_Cleaner_Login_to_Cleaner_Page, bundleSend);
                             }
                         }
             });

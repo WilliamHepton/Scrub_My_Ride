@@ -42,7 +42,8 @@ public class AddressChoiceFragment extends Fragment {
     EditText PostCodeET, AddressET;
     Spinner AddressListS;
     Bundle bundleReceived, bundleSend;
-    int washTypeID;
+    int washTypeID, customerID;
+    String carReg;
 
     @Override
     public View onCreateView(
@@ -63,6 +64,8 @@ public class AddressChoiceFragment extends Fragment {
 
         bundleReceived = getArguments();
         washTypeID = bundleReceived.getInt("washTypeID");
+        customerID = bundleReceived.getInt("customerID");
+        carReg = bundleReceived.getString("carReg");
 
         final Context context = this.getContext();
 
@@ -82,9 +85,16 @@ public class AddressChoiceFragment extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bundleSend.putString("address", AddressET.getText().toString());
-                bundleSend.putInt("washTypeID", washTypeID);
-                navController.navigate(R.id.action_Booking_Address_to_Booking_Date, bundleSend);
+                if (AddressET.getText().toString().trim().length() == 0) {
+                    AddressET.setError("Please enter your address");
+                } else {
+                    bundleSend = new Bundle();
+                    bundleSend.putString("address", AddressET.getText().toString());
+                    bundleSend.putInt("washTypeID", washTypeID);
+                    bundleSend.putInt("customerID", customerID);
+                    bundleSend.putString("carReg", carReg);
+                    navController.navigate(R.id.action_Booking_Address_to_Booking_Date, bundleSend);
+                }
             }
         });
 
@@ -131,7 +141,6 @@ public class AddressChoiceFragment extends Fragment {
                                 }
                                 addressNumbers = addressLine.substring(0, firstSpaceIndex);
                                 if (addressNumbers.matches("(\\d+)(-)(\\d+)")) {
-                                    Log.d("test", addressNumbers);
                                     int dashIndex = addressNumbers.indexOf('-');
                                     int minNumber = Integer.parseInt(addressNumbers.substring(0, dashIndex));
                                     int maxnumber = Integer.parseInt(addressNumbers.substring(dashIndex + 1));

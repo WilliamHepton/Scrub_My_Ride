@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +11,7 @@
         android:orientation="horizontal">
 
         <Space
-            android:layout_width="253dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
@@ -18,7 +19,9 @@
             android:id="@+id/btn_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/red"
             android:text="@string/btn_logout" />
 
     </LinearLayout>
@@ -39,7 +42,8 @@
             android:id="@+id/txt_timeTable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_timetable" />
+            android:text="@string/txt_timetable"
+            android:textSize="24sp" />
 
         <CalendarView
             android:id="@+id/cv_workCalendar"
@@ -48,14 +52,25 @@
 
         <Button
             android:id="@+id/btn_scheduleWork"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@color/accentColor"
             android:text="@string/btn_scheduleWork" />
 
         <Button
-            android:id="@+id/btn_editDetails"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_setWashType"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorAccent"
+            android:text="@string/btn_setWashType" />
+
+        <Button
+            android:id="@+id/btn_editDetails"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@color/accentColor"
             android:text="@string/btn_editDetails" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

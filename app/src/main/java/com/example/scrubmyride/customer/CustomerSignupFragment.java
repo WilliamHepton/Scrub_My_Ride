@@ -1,4 +1,4 @@
-package com.example.scrubmyride.user;
+package com.example.scrubmyride.customer;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +18,10 @@ import com.example.scrubmyride.AsyncResponse;
 import com.example.scrubmyride.BackgroundWorker;
 import com.example.scrubmyride.R;
 
-public class UserSignupFragment extends Fragment {
+public class CustomerSignupFragment extends Fragment {
 
-    EditText FirstNameET, LastNameET, PhoneNumberET, EmailET, PostCodeET, PasswordET, PasswordConfirmET;
+    EditText FirstNameET, LastNameET, PhoneNumberET, EmailET, PostCodeET, CarRegET, PasswordET, PasswordConfirmET;
+    Bundle bundleSend;
 
     @Override
     public View onCreateView(
@@ -28,12 +29,13 @@ public class UserSignupFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f_user_signup, container, false);
+        View view = inflater.inflate(R.layout.f_customer_signup, container, false);
         FirstNameET = view.findViewById((R.id.et_firstName));
         LastNameET = view.findViewById((R.id.et_lastName));
         PhoneNumberET = view.findViewById((R.id.et_phoneNumber));
         EmailET = view.findViewById((R.id.et_email));
         PostCodeET = view.findViewById((R.id.et_postCode));
+        CarRegET = view.findViewById((R.id.et_carReg));
         PasswordET = view.findViewById((R.id.et_password));
         PasswordConfirmET = view.findViewById((R.id.et_passwordConfirm));
         return view;
@@ -54,10 +56,10 @@ public class UserSignupFragment extends Fragment {
                 String phoneNumber = PhoneNumberET.getText().toString();
                 String email = EmailET.getText().toString();
                 String postCode = PostCodeET.getText().toString();
+                String carReg = CarRegET.getText().toString();
                 String password = PasswordET.getText().toString();
                 String passwordConfirm = PasswordConfirmET.getText().toString();
                 String type = "register";
-
                 if (password.equals(passwordConfirm)) {
                     BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
                             new AsyncResponse() {
@@ -65,8 +67,10 @@ public class UserSignupFragment extends Fragment {
                                 public void processFinish(Object output) {
                                     Log.d("ResponseFromAsync", (String) output);
                                     if (!"-1".equals((String) output)) {
-                                        Log.d("TestString", (String) output);
-                                        navController.navigate(R.id.action_userSignupFragment_to_userSignup2Fragment);
+                                        bundleSend = new Bundle();
+                                        bundleSend.putString("phoneNumber", phoneNumber);
+                                        bundleSend.putString("carReg", carReg);
+                                        navController.navigate(R.id.action_userSignupFragment_to_userPageFragment, bundleSend);
                                     }
                                 }
                             });

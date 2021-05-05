@@ -20,20 +20,27 @@ import androidx.navigation.Navigation;
 import com.example.scrubmyride.AsyncResponse;
 import com.example.scrubmyride.BackgroundWorker;
 import com.example.scrubmyride.R;
+import com.example.scrubmyride.entities.Cleaner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CleanerChoiceFragment extends Fragment {
 
     String cleanersString= "";
     JSONArray cleanersJSONArray;
-    String selectedDateStart, selectedDateEnd;
+    String selectedDateStart, selectedDateEnd, dateTimeStart;
     Bundle bundleReceived, bundleSend;
-    Spinner CleanerListS;
+    Spinner CleanerListS, CleanerHoursS;
     ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
+    int customerID, washTypeID;
+    Cleaner selectedCleaner;
 
     @Override
     public View onCreateView(
@@ -41,34 +48,38 @@ public class CleanerChoiceFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.f_booking_cleaner_choice, container, false);
+        View view = inflater.inflate(R.layout.f_booking_cleaner_choice, container, false);
+
+        CleanerListS = view.findViewById(R.id.s_cleanersList);
+        CleanerHoursS = view.findViewById(R.id.s_cleanerHours);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final Context context = this.getContext();
-
+        final NavController navController = Navigation.findNavController(view);
         bundleReceived = getArguments();
         selectedDateStart = bundleReceived.getString("selectedDateStart");
         selectedDateEnd = bundleReceived.getString("selectedDateEnd");
-        CleanerListS = view.findViewById(R.id.s_cleanersList);
-
-        Log.d("selectedDateStart", selectedDateStart);
-        Log.d("selectedDateEnd", selectedDateEnd);
-
+        customerID = bundleReceived.getInt("customerID");
+        washTypeID = bundleReceived.getInt("washTypeID");
         this.getCleaners(context);
-        final NavController navController = Navigation.findNavController(view);
 
         Button btn_next = view.findViewById((R.id.btn_bookingCleanerChoice_next));
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bundleSend.putString("selectedDateStart", bundleReceived.getString("selectedDateStart"));
-                bundleSend.putString("selectedDateEnd", bundleReceived.getString("selectedDateEnd"));
+                bundleSend = new Bundle();
+                bundleSend.putString("dateTimeStart", selectedDateStart);
                 bundleSend.putString("address", bundleReceived.getString("address"));
-                bundleSend.putInt("washTypeID", bundleReceived.getInt("washTypeID"));
+                bundleSend.putString("carReg", bundleReceived.getString("carReg"));
+                bundleSend.putInt("washTypeID", washTypeID);
+                bundleSend.putInt("customerID", customerID);
+                bundleSend.putInt("cleanerID", selectedCleaner.getUserID());
+
                 navController.navigate(R.id.action_Booking_CleanerChoice_to_Booking_Payment, bundleSend);
             }
         });
@@ -84,7 +95,26 @@ public class CleanerChoiceFragment extends Fragment {
         CleanerListS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-               // AddressET.setText(parentView.getItemAtPosition(position).toString());
+                String cleanerFullName = parentView.getItemAtPosition(position).toString();
+                cleanerFullName = cleanerFullName.substring(0, cleanerFullName.indexOf("-")-1);
+                if (getCleanerByName(cleanerFullName)) {
+                    getHours(context);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
+
+        CleanerHoursS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime tempDate = LocalDateTime.parse(selectedCleaner.getStartDate(), dateFormat);
+                String tempTime = parentView.getItemAtPosition(position).toString().substring(0,5);
+                dateTimeStart = tempDate.getYear() + "-" + tempDate.getMonthValue() + "-" + tempDate.getDayOfMonth() + " " + tempTime + ":00";
             }
 
             @Override
@@ -110,19 +140,29 @@ public class CleanerChoiceFragment extends Fragment {
                                 for(int i=0; i<cleanersJSONArray.length(); i++) {
                                     cleanersStringArray[i] = cleanersJSONArray.optString(i);
 
+                                    // put cleaner json output into an array of cleaners
                                     cleanersStringArray[i] = cleanersStringArray[i].substring(2, cleanersStringArray[i].length()-1);
+
                                     int userID = Integer.parseInt(cleanersStringArray[i].substring(0, cleanersStringArray[i].indexOf("\"")));
-                                    cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length()-1);
+
+                                    cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length());
                                     String firstName = cleanersStringArray[i].substring(0, cleanersStringArray[i].indexOf("\""));
-                                    cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length()-1);
+
+                                    cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length());
                                     String lastName = cleanersStringArray[i].substring(0, cleanersStringArray[i].indexOf("\""));
-                                    cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length()-1);
+
+                                    cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length());
                                     String startDate = cleanersStringArray[i].substring(0, cleanersStringArray[i].indexOf("\""));
+
+                                    cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length());
+                                    String endDate = cleanersStringArray[i].substring(0, cleanersStringArray[i].indexOf("\""));
+
                                     cleanersStringArray[i] = cleanersStringArray[i].substring(cleanersStringArray[i].indexOf("\"")+3, cleanersStringArray[i].length()-1);
-                                    String endDate = cleanersStringArray[i];
-                                    Cleaner newCleaner = new Cleaner(userID, firstName, lastName, startDate, endDate);
+                                    Double price = Double.parseDouble(cleanersStringArray[i]);
+
+                                    Cleaner newCleaner = new Cleaner(userID, firstName, lastName, "", "", "", "", true, startDate, endDate, price);
                                     cleaners.add(newCleaner);
-                                    cleanerStringDisplay[i] = firstName + " " + lastName;
+                                    cleanerStringDisplay[i] = firstName + " " + lastName + " - " + price.toString() + "£";
                                 }
 
                                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, cleanerStringDisplay);
@@ -136,43 +176,67 @@ public class CleanerChoiceFragment extends Fragment {
                         }
                     }
                 });
-        backgroundWorker.execute(type, selectedDateStart, selectedDateEnd);
+        backgroundWorker.execute(type, selectedDateStart, selectedDateEnd, washTypeID);
     }
 
-    class Cleaner {
-        private int userID;
-        private String firstName;
-        private String lastName;
-        private String startDate;
-        private String endDate;
+    public void getHours(Context context) {
 
-        public Cleaner(int userID, String firstName, String lastName, String startDate, String endDate) {
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime startTime = LocalDateTime.parse(selectedCleaner.getStartDate(), dateFormat);
+        LocalDateTime endTime = LocalDateTime.parse(selectedCleaner.getEndDate(), dateFormat);
+
+        int startHour = startTime.getHour();
+        int startMinute = startTime.getMinute();
+        int endHour = endTime.getHour();
+        int endMinute = startTime.getMinute();
+        int loops = (endHour - startHour)*4;
+
+        if((endMinute - startMinute) > 0) {
+            loops += (endMinute - startMinute)/15;
         }
 
+        String[] cleanerStringDisplay = new String[loops];
+        String displayTimeStart;
+        String displayTimeEnd;
+        int displayHour = startHour;
+        int currentMinutes = startMinute;
+        for(int i = 0; i < loops; i++){
+            displayTimeStart = displayHour + ":" + currentMinutes;
 
-        public int getUserID() {
-            return userID;
+            if(currentMinutes == 0){
+                displayTimeStart += "0";
+            }
+            if(currentMinutes == 45){
+                displayTimeEnd = displayHour + 1 + ":00";
+            } else {
+                displayTimeEnd = displayHour + ":" + (currentMinutes+15);
+            }
+            cleanerStringDisplay[i] = displayTimeStart + " to " + displayTimeEnd;
+            currentMinutes += 15;
+            if (currentMinutes == 60) {
+                displayHour++;
+                currentMinutes = 0;
+            }
         }
 
-        public String getFirstName() {
-            return firstName;
-        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, cleanerStringDisplay);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapter.notifyDataSetChanged();
+        CleanerHoursS.setAdapter(arrayAdapter);
+    }
 
-        public String getLastName() {
-            return lastName;
+    public boolean getCleanerByName(String fullName) {
+        if(cleaners.size() > 0) {
+            Iterator<Cleaner> iter = cleaners.iterator();
+            while (iter.hasNext()) {
+                Cleaner c = iter.next();
+                if (fullName.equals(c.getFirstName() + " " + c.getLastName())) {
+                    selectedCleaner = c;
+                    return true;
+                }
+            }
         }
-
-        public String getStartDate() {
-            return startDate;
-        }
-
-        public String getEndDate() {
-            return endDate;
-        }
-
-
-        public String toString() {
-            return String.format("userID:%d,firstName:%s,lastName:%s,startDate:%s,endDate:%s", userID, firstName, lastName, startDate, endDate);
-        }
+        return false;
     }
 }

@@ -66,7 +66,7 @@ public class CleanerSignupFragment extends Fragment {
                                     Log.d("ResponseFromAsync", (String) output);
                                     if (!"-1".equals((String) output)) {
                                         Log.d("TestString", (String) output);
-                                        navController.navigate(R.id.action_Cleaner_Signup_to_Cleaner_Signup2);
+                                        navController.navigate(R.id.action_Cleaner_Signup_to_Cleaner_Page);
                                     }
                                 }
                             });

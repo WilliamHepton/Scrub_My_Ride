@@ -1,7 +1,6 @@
-package com.example.scrubmyride.user;
+package com.example.scrubmyride.customer;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,11 @@ import com.example.scrubmyride.AsyncResponse;
 import com.example.scrubmyride.BackgroundWorker;
 import com.example.scrubmyride.R;
 
-public class UserLoginFragment extends Fragment {
+public class CustomerLoginFragment extends Fragment {
 
     EditText PhoneNumberET, PasswordET;
+    int userID;
+    Bundle bundleSend;
 
     @Override
     public View onCreateView(
@@ -28,7 +29,7 @@ public class UserLoginFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f_user_login, container, false);
+        View view = inflater.inflate(R.layout.f_customer_login, container, false);
         PhoneNumberET = view.findViewById((R.id.input_phone));
         PasswordET = view.findViewById((R.id.input_password));
         return view;
@@ -52,7 +53,10 @@ public class UserLoginFragment extends Fragment {
                         @Override
                         public void processFinish(Object output) {
                             if (!"-1".equals((String) output)) {
-                                navController.navigate(R.id.action_userLoginFragment_to_userPageFragment);
+                                userID = Integer.parseInt(output.toString());
+                                bundleSend = new Bundle();
+                                bundleSend.putInt("userID", userID);
+                                navController.navigate(R.id.action_userLoginFragment_to_userPageFragment, bundleSend);
                             }
                         }
                     });

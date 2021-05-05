@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,15 +11,18 @@
         android:orientation="horizontal">
 
         <Space
-            android:layout_width="253dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorPrimary" />
 
         <Button
             android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/red"
             android:text="@string/btn_close" />
 
     </LinearLayout>
@@ -66,18 +70,18 @@
                 <EditText
                     android:id="@+id/et_monStart"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeStart"
-                    android:inputType="textPersonName"
-                    android:autofillHints="" />
+                    android:inputType="textPersonName" />
 
                 <EditText
                     android:id="@+id/et_monEnd"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeEnd"
@@ -101,8 +105,8 @@
                 <EditText
                     android:id="@+id/et_tueStart"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeStart"
@@ -111,8 +115,8 @@
                 <EditText
                     android:id="@+id/et_tueEnd"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeEnd"
@@ -135,8 +139,8 @@
                 <EditText
                     android:id="@+id/et_wedStart"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeStart"
@@ -145,8 +149,8 @@
                 <EditText
                     android:id="@+id/et_wedEnd"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeEnd"
@@ -169,8 +173,8 @@
                 <EditText
                     android:id="@+id/et_thuStart"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeStart"
@@ -179,8 +183,8 @@
                 <EditText
                     android:id="@+id/et_thuEnd"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeEnd"
@@ -203,8 +207,8 @@
                 <EditText
                     android:id="@+id/et_friStart"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeStart"
@@ -213,8 +217,8 @@
                 <EditText
                     android:id="@+id/et_friEnd"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeEnd"
@@ -237,8 +241,8 @@
                 <EditText
                     android:id="@+id/et_satStart"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeStart"
@@ -247,8 +251,8 @@
                 <EditText
                     android:id="@+id/et_satEnd"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeEnd"
@@ -271,8 +275,8 @@
                 <EditText
                     android:id="@+id/et_sunStart"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeStart"
@@ -281,8 +285,8 @@
                 <EditText
                     android:id="@+id/et_sunEnd"
                     android:layout_width="wrap_content"
-                    android:layout_weight=".50"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".50"
                     android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/txt_timeEnd"
@@ -295,6 +299,7 @@
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/green"
             android:text="@string/btn_save" />
 
     </LinearLayout>

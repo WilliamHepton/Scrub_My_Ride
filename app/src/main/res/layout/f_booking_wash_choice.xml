@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".HomePageFragment">
 
     <LinearLayout
@@ -13,16 +14,17 @@
         android:orientation="horizontal">
 
         <Space
-            android:layout_width="253dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Button
             android:id="@+id/btn_close"
-            android:layout_width="3dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/red"
             android:text="@string/btn_close" />
     </LinearLayout>
 
@@ -33,6 +35,25 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_carReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_carReg"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_carReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:hint="@string/txt_carRegHint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
             android:id="@+id/txt_washType"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -40,22 +61,23 @@
             android:gravity="center"
             android:text="@string/txt_washType"
             android:textAllCaps="false"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_outsideWash"
             android:layout_width="220dp"
             android:layout_height="120dp"
             android:layout_marginBottom="20dp"
-            android:background="#00E676"
-            android:shadowColor="#FF6D00"
+            android:background="@color/green"
+            android:shadowColor="@color/shadow"
             android:text="@string/txt_outsideWash" />
 
         <Button
             android:id="@+id/btn_outInWash"
             android:layout_width="220dp"
             android:layout_height="120dp"
-            android:background="#00E676"
+            android:background="@color/green"
+            android:shadowColor="@color/shadow"
             android:text="@string/txt_outInWash" />
 
     </LinearLayout>

@@ -32,18 +32,26 @@
             app:destination="@id/Cleaner_Login" />
         <argument
             android:name="userID"
-            app:argType="string" />
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_Cleaner_Page_to_cleanerWashTypesFragment"
+            app:destination="@id/cleanerWashTypesFragment" />
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Work"
         android:name="com.example.scrubmyride.cleaner.CleanerWorkFragment"
         tools:layout="@layout/f_cleaner_work">
+        <argument
+            android:name="userID"
+            app:argType="integer" />
         <action
             android:id="@+id/action_Cleaner_Work_to_Cleaner_Page"
             app:destination="@id/Cleaner_Page" />
-        <argument
-            android:name="userID"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/Cleaner_Details"
@@ -73,18 +81,10 @@
         android:name="com.example.scrubmyride.cleaner.CleanerSignupFragment"
         tools:layout="@layout/f_cleaner_signup">
         <action
-            android:id="@+id/action_Cleaner_Signup_to_Cleaner_Signup2"
-            app:destination="@id/Cleaner_Signup2" />
-        <action
             android:id="@+id/action_Cleaner_Signup_to_homeSignupFragment"
             app:destination="@id/homeSignupFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/Cleaner_Signup2"
-        android:name="com.example.scrubmyride.cleaner.CleanerSignup2Fragment"
-        tools:layout="@layout/f_cleaner_signup2">
         <action
-            android:id="@+id/action_Cleaner_Signup2_to_Cleaner_Page"
+            android:id="@+id/action_Cleaner_Signup_to_Cleaner_Page"
             app:destination="@id/Cleaner_Page" />
     </fragment>
     <fragment
@@ -98,6 +98,13 @@
         <action
             android:id="@+id/action_Booking_WashChoice_to_HomePage"
             app:destination="@id/HomePage" />
+        <argument android:name="customerID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="carReg"
+            app:argType="string"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/Booking_Address"
@@ -113,6 +120,12 @@
         <argument
             android:name="washTypeID"
             app:argType="integer" />
+        <argument
+            android:name="customerID"
+            app:argType="integer" />
+        <argument
+            android:name="carReg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/Booking_Date"
@@ -131,6 +144,12 @@
         <argument
             android:name="washTypeID"
             app:argType="integer" />
+        <argument
+            android:name="customerID"
+            app:argType="integer" />
+        <argument
+            android:name="carReg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/Booking_CleanerChoice"
@@ -155,6 +174,12 @@
         <argument
             android:name="washTypeID"
             app:argType="integer" />
+        <argument
+            android:name="customerID"
+            app:argType="integer" />
+        <argument
+            android:name="carReg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/Booking_Payment"
@@ -167,51 +192,62 @@
         <argument
             android:name="dateTimeStart"
             app:argType="string" />
-        <argument android:name="cleanerID" />
-        <argument android:name="customerID" />
-        <argument android:name="washTypeID" />
+        <argument android:name="cleanerID"
+            app:argType="integer" />
+        <argument android:name="customerID"
+            app:argType="integer" />
+        <argument android:name="washTypeID"
+            app:argType="integer" />
+        <argument
+            android:name="carReg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/userSignupFragment"
-        android:name="com.example.scrubmyride.user.UserSignupFragment"
+        android:name="com.example.scrubmyride.customer.CustomerSignupFragment"
         android:label="UserSignupFragment"
-        tools:layout="@layout/f_user_signup">
-        <action
-            android:id="@+id/action_userSignupFragment_to_userSignup2Fragment"
-            app:destination="@id/userSignup2Fragment" />
+        tools:layout="@layout/f_customer_signup">
         <action
             android:id="@+id/action_userSignupFragment_to_homeSignupFragment"
             app:destination="@id/homeSignupFragment" />
+        <action
+            android:id="@+id/action_userSignupFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"
-        android:name="com.example.scrubmyride.user.UserDetailsFragment"
+        android:name="com.example.scrubmyride.customer.CustomerDetailsFragment"
         android:label="UserDetailsFragment"
-        tools:layout="@layout/f_user_details">
+        tools:layout="@layout/f_customer_details">
         <action
             android:id="@+id/action_userDetailsFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/userSignup2Fragment"
-        android:name="com.example.scrubmyride.user.UserSignup2Fragment"
-        android:label="UserSignup2Fragment"
-        tools:layout="@layout/f_user_signup2">
-        <action
-            android:id="@+id/action_userSignup2Fragment_to_userPageFragment"
-            app:destination="@id/userPageFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/userPageFragment"
-        android:name="com.example.scrubmyride.user.UserPageFragment"
+        android:name="com.example.scrubmyride.customer.CustomerPageFragment"
         android:label="UserPageFragment"
-        tools:layout="@layout/f_user_page">
+        tools:layout="@layout/f_customer_page">
         <action
             android:id="@+id/action_userPageFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
         <action
             android:id="@+id/action_userPageFragment_to_userLoginFragment"
             app:destination="@id/userLoginFragment" />
+        <action
+            android:id="@+id/action_userPageFragment_to_Booking_WashChoice"
+            app:destination="@id/Booking_WashChoice" />
+        <argument
+            android:name="userID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"
+            android:defaultValue="0" />
+        <argument
+            android:name="carReg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homeLoginFragment"
@@ -245,14 +281,23 @@
     </fragment>
     <fragment
         android:id="@+id/userLoginFragment"
-        android:name="com.example.scrubmyride.user.UserLoginFragment"
+        android:name="com.example.scrubmyride.customer.CustomerLoginFragment"
         android:label="UserLoginFragment"
-        tools:layout="@layout/f_user_login">
+        tools:layout="@layout/f_customer_login">
         <action
             android:id="@+id/action_userLoginFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
         <action
             android:id="@+id/action_userLoginFragment_to_homeLoginFragment"
             app:destination="@id/homeLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cleanerWashTypesFragment"
+        android:name="com.example.scrubmyride.cleaner.CleanerWashTypesFragment"
+        android:label="CleanerWashTypesFragment"
+        tools:layout="@layout/f_cleaner_wash_types">
+        <action
+            android:id="@+id/action_cleanerWashTypesFragment_to_Cleaner_Page"
+            app:destination="@id/Cleaner_Page" />
     </fragment>
 </navigation>

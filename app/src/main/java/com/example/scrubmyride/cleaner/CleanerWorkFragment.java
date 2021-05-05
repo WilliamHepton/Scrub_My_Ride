@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 
 import com.example.scrubmyride.AsyncResponse;
@@ -41,8 +42,8 @@ public class CleanerWorkFragment extends Fragment {
     TableLayout dateTable;
     EditText monStartTime, tueStartTime,  wedStartTime,  thuStartTime,  friStartTime,  satStartTime,  sunStartTime,
             monEndTime, tueEndTime,  wedEndTime,  thuEndTime,  friEndTime,  satEndTime,  sunEndTime;
-    String userID;
-    Bundle bundle;
+    Bundle bundleReceived, bundleSend;
+    int userID;
 
     @Override
     public View onCreateView(
@@ -68,9 +69,6 @@ public class CleanerWorkFragment extends Fragment {
         satEndTime = view.findViewById(R.id.et_satEnd);
         sunEndTime = view.findViewById(R.id.et_sunEnd);
 
-        bundle = getArguments();
-        userID = bundle.getString("userID");
-
         return view;
     }
 
@@ -78,6 +76,9 @@ public class CleanerWorkFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        bundleReceived = getArguments();
+        userID = bundleReceived.getInt("userID");
 
         final NavController navController = findNavController(view);
         final Context context = this.getContext();
@@ -102,7 +103,6 @@ public class CleanerWorkFragment extends Fragment {
         btn_save.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Cleaner_Work_to_Cleaner_Page);
 
                 String type = "schedule";
                 HashMap<String, String> startTimesList = new HashMap<String, String>();
@@ -133,17 +133,14 @@ public class CleanerWorkFragment extends Fragment {
                         endTimesList.put(k, "-1");
                     }
                 });
-
                 BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
                         new AsyncResponse() {
                             @Override
                             public void processFinish(Object output) {
-                                Log.d("ResponseFromAsync", (String) output);
                                 if (!"-1".equals((String) output)) {
-                                    Log.d("TestString", (String) output);
-                                    Bundle bundle2 = new Bundle();
-                                    bundle.putString("userID", userID);
-                                    //navController.navigate(R.id.action_Cleaner_Work_to_Cleaner_Page, bundle2);
+                                    bundleSend = new Bundle();
+                                    bundleSend.putInt("userID", bundleReceived.getInt("userID"));
+                                    navController.navigate(R.id.action_Cleaner_Work_to_Cleaner_Page, bundleSend);
                                 }
                             }
                         });
@@ -155,7 +152,9 @@ public class CleanerWorkFragment extends Fragment {
         btn_close.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Cleaner_Work_to_Cleaner_Page, bundle);
+                bundleSend = new Bundle();
+                bundleSend.putInt("userID", bundleReceived.getInt("userID"));
+                navController.navigate(R.id.action_Cleaner_Work_to_Cleaner_Page, bundleSend);
             }
         });
 
