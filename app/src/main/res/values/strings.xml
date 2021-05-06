@@ -54,6 +54,8 @@
     <string name="input_phoneNumberEnter">Enter your phone number</string>
     <string name="input_passwordEnter">Enter your password</string>
     <string name="input_address">Enter your address</string>
+    <string name="txt_loginCustomerPage">Customer Login Page</string>
+    <string name="txt_loginCleanerPage">Cleaner Login Page</string>
 
     <string name="txt_name"> </string>
     <string name="txt_timetable">My current bookings</string>
@@ -61,7 +63,7 @@
     <string name="btn_setWashType">Set your fees</string>
     <string name="btn_editDetails">Edit my details</string>
 
-    <string name="txt_becomeWasher">Become a car washer today!</string>
+    <string name="txt_becomeWasher">Become a car cleaner today!</string>
     <string name="input_firstName">First name</string>
     <string name="input_lastName">Last name</string>
     <string name="input_phoneNumber">Phone number</string>
@@ -70,6 +72,8 @@
     <string name="input_carReg">Car registration number</string>
     <string name="input_password">Password</string>
     <string name="input_passwordConfirm">Confirm passowrd</string>
+    <string name="txt_registerCustomerPage">Customer Register Page</string>
+    <string name="txt_registerCleanerPage">Cleaner Register Page</string>
 
     <string name="txt_checkAddress">Edit or verify the address below</string>
 
@@ -95,6 +99,8 @@
     <string name="txt_verifyEmail">Please verify your email so you can start taking on bookings!</string>
 
     <string name="txt_email">Your invoice will be sent to the email below</string>
+
+    <string name="txt_popupInfo">Date Information</string>
 
 
 

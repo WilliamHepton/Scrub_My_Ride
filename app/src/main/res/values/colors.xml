@@ -11,4 +11,5 @@
     <color name="secondTextColor">#757575</color>
     <color name="divider">#BDBDBD</color>
     <color name="shadow">#FF6D00</color>
+    <color name="Grey">#064557</color>
 </resources>

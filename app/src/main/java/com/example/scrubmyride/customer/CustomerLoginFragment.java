@@ -73,7 +73,7 @@ public class CustomerLoginFragment extends Fragment {
         });
 
         Button btn_register = view.findViewById((R.id.btn_register));
-        btn_close.setOnClickListener(new View.OnClickListener() {
+        btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.action_userLoginFragment_to_userSignupFragment);

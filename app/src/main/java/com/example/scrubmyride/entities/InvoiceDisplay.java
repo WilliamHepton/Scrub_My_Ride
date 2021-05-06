@@ -1,6 +1,6 @@
 package com.example.scrubmyride.entities;
 
-public class InvoiceCustomer {
+public class InvoiceDisplay {
     private int InvoiceID;
     private String ServiceTimeStart;
     private float Price;
@@ -11,7 +11,7 @@ public class InvoiceCustomer {
     private String Email;
     private String PhoneNumber;
 
-    public InvoiceCustomer(int invoiceID, String serviceTimeStart, float price, float serviceFee, String description, String firstName, String lastName, String email, String phoneNumber) {
+    public InvoiceDisplay(int invoiceID, String serviceTimeStart, float price, float serviceFee, String description, String firstName, String lastName, String email, String phoneNumber) {
         InvoiceID = invoiceID;
         ServiceTimeStart = serviceTimeStart;
         Price = price;

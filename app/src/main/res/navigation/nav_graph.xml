@@ -321,14 +321,14 @@
         android:label="UserLoginFragment"
         tools:layout="@layout/f_customer_login">
         <action
-            android:id="@+id/action_userLoginFragment_to_userPageFragment"
-            app:destination="@id/userPageFragment" />
-        <action
             android:id="@+id/action_userLoginFragment_to_homeLoginFragment"
             app:destination="@id/homeLoginFragment" />
         <action
             android:id="@+id/action_userLoginFragment_to_userSignupFragment"
             app:destination="@id/userSignupFragment" />
+        <action
+            android:id="@+id/action_userLoginFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/cleanerWashTypesFragment"

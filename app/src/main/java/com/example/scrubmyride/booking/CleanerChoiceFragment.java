@@ -208,19 +208,23 @@ public class CleanerChoiceFragment extends Fragment {
         for(int i = 0; i < loops; i++){
             displayTimeStart = displayHour + ":" + currentMinutes;
 
-            if(currentMinutes == 0){
-                displayTimeStart += "0";
+            if(currentMinutes < 10){
+                displayTimeStart = displayHour + ":0" + currentMinutes;
             }
-            if(currentMinutes == 45){
-                displayTimeEnd = displayHour + 1 + ":00";
+
+            if(currentMinutes >= 45){
+                displayTimeEnd = displayHour + 1 + ":" + (currentMinutes+15 - 60);
+                if (((currentMinutes+15) - 60) < 10) {
+                    displayTimeEnd = displayHour + ":0" + (currentMinutes+15 - 60);
+                }
             } else {
                 displayTimeEnd = displayHour + ":" + (currentMinutes+15);
             }
             cleanerStringDisplay[i] = displayTimeStart + " to " + displayTimeEnd;
             currentMinutes += 15;
-            if (currentMinutes == 60) {
+            if (currentMinutes >= 60) {
                 displayHour++;
-                currentMinutes = 0;
+                currentMinutes = currentMinutes - 60;
             }
         }
 

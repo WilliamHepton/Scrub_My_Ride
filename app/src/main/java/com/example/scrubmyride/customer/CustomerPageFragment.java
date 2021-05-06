@@ -1,16 +1,16 @@
 package com.example.scrubmyride.customer;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.PrecomputedText;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CalendarView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,22 +22,29 @@ import androidx.navigation.Navigation;
 import com.example.scrubmyride.AsyncResponse;
 import com.example.scrubmyride.BackgroundWorker;
 import com.example.scrubmyride.R;
-import com.example.scrubmyride.entities.Cleaner;
 import com.example.scrubmyride.entities.Customer;
-import com.example.scrubmyride.entities.InvoiceCustomer;
+import com.example.scrubmyride.entities.InvoiceDisplay;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
+import com.skyhope.eventcalenderlibrary.CalenderEvent;
+import com.skyhope.eventcalenderlibrary.listener.CalenderDayClickListener;
+import com.skyhope.eventcalenderlibrary.model.DayContainerModel;
+import com.skyhope.eventcalenderlibrary.model.Event;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class CustomerPageFragment extends Fragment {
 
@@ -46,8 +53,8 @@ public class CustomerPageFragment extends Fragment {
     Bundle bundleReceived, bundleSend;
     Customer customer;
     TextView customerName;
-    ArrayList<InvoiceCustomer> customerInvoices = new ArrayList<>();
-    CalendarView calendar;
+    ArrayList<InvoiceDisplay> customerInvoices = new ArrayList<>();
+    CalenderEvent calendar;
 
 
     @Override
@@ -59,7 +66,7 @@ public class CustomerPageFragment extends Fragment {
         View view = inflater.inflate(R.layout.f_customer_page, container, false);
 
         customerName = view.findViewById(R.id.txt_username);
-        calendar = view.findViewById(R.id.calendarView);
+        calendar = view.findViewById(R.id.calender_event);
 
         return view;
     }
@@ -113,7 +120,63 @@ public class CustomerPageFragment extends Fragment {
             }
         });
 
-        calendar.
+        calendar.initCalderItemClickCallback(new CalenderDayClickListener() {
+            @Override
+            public void onGetDay(DayContainerModel dayContainerModel) {
+                showPopup(view, dayContainerModel.getDate());
+            }
+        });
+    }
+
+    public void showPopup(View view, String date) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                this.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.workdaymenu_popup, null);
+
+        TextView clientName = popupView.findViewById((R.id.txt_popup1));
+        TextView startTime = popupView.findViewById((R.id.txt_popup2));
+        TextView washType = popupView.findViewById((R.id.txt_popup3));
+        TextView clientEmail = popupView.findViewById((R.id.txt_popup4));
+        TextView clientPhone = popupView.findViewById((R.id.txt_popup5));
+        TextView servicePrice = popupView.findViewById((R.id.txt_popup6));
+
+
+        InvoiceDisplay bookingOnSelectedDay = customerInvoices.stream().filter(x -> SQLDateToEventCalendarDate(x.getServiceTimeStart()).equals(date)).findFirst().orElse(null);
+
+        if(bookingOnSelectedDay != null){
+            clientName.setText("Cleaner: " + bookingOnSelectedDay.getFirstName() + " " + bookingOnSelectedDay.getLastName());
+            startTime.setText("Start time: " + SQLDateToTime(bookingOnSelectedDay.getServiceTimeStart()));
+            washType.setText("Wash type: " + bookingOnSelectedDay.getDescription());
+            clientEmail.setText("Cleaner's email: " + bookingOnSelectedDay.getEmail());
+            clientPhone.setText("Cleaner's phone: " + bookingOnSelectedDay.getPhoneNumber());
+            float fullPrice = bookingOnSelectedDay.getPrice() + bookingOnSelectedDay.getServiceFee();
+            servicePrice.setText("Service price including fees: £ " + fullPrice);
+        } else {
+            clientName.setText("You have not yet booked anything on this day.");
+        }
+
+
+
+        // create the popup window
+        int width = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics())); // LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics())); //LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup windo
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        //Close popup window
+        Button btn_closePopup = popupView.findViewById((R.id.btn_close_popup));
+        btn_closePopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+
     }
 
     public void getUser(Context context) {
@@ -186,7 +249,7 @@ public class CustomerPageFragment extends Fragment {
 
                         if (!"-1".equals((String) output)) {
                             String invoicesString = output.toString();
-                            //Convert SQL output to an array of InvoiceCustomer objects
+                            //Convert SQL output to an array of InvoiceDisplay objects
                             JSONArray invoicesJSONArray = null;
                             try {
                                 invoicesJSONArray = new JSONArray(invoicesString);
@@ -195,9 +258,10 @@ public class CustomerPageFragment extends Fragment {
                                for(int i=0; i<invoicesJSONArray.length(); i++) {
                                     String stringInvoice = invoicesJSONArray.getJSONArray(i).toString();
                                     String[] invoiceStringArray = stringInvoice.replaceAll("[\\[\\]\"]", "").split(",");
-                                    customerInvoices.add(new InvoiceCustomer(Integer.parseInt(invoiceStringArray[0]), invoiceStringArray[1], Float.parseFloat(invoiceStringArray[2]), Float.parseFloat(invoiceStringArray[3]), invoiceStringArray[4], invoiceStringArray[5], invoiceStringArray[6], invoiceStringArray[7], invoiceStringArray[8]));
+                                    customerInvoices.add(new InvoiceDisplay(Integer.parseInt(invoiceStringArray[0]), invoiceStringArray[1], Float.parseFloat(invoiceStringArray[2]), Float.parseFloat(invoiceStringArray[3]), invoiceStringArray[4], invoiceStringArray[5], invoiceStringArray[6], invoiceStringArray[7], invoiceStringArray[8]));
                                }
 
+                                setCalendarEvents();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -206,5 +270,46 @@ public class CustomerPageFragment extends Fragment {
                     }
                 });
         backgroundWorker.execute(type, userID);
+    }
+
+    public void setCalendarEvents(){
+        Log.d("trest", customerInvoices.size() + "");
+        for(int i=0; i<customerInvoices.size(); i++) {
+            Event event = new Event(DateStringToMillis(customerInvoices.get(i).getServiceTimeStart()), "CW", Color.RED);
+            calendar.addEvent(event);
+        }
+    }
+
+    public long DateStringToMillis(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        LocalDateTime localDate = LocalDateTime.parse(date, formatter);
+        long timeInMilliseconds = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
+        return timeInMilliseconds;
+    }
+
+    public String SQLDateToEventCalendarDate(String date){
+        SimpleDateFormat spf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date newDate= null;
+        try {
+            newDate = spf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        spf= new SimpleDateFormat("d MMM yyyy");
+        date = spf.format(newDate);
+        return date;
+    }
+
+    public String SQLDateToTime(String date){
+        SimpleDateFormat spf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date newDate= null;
+        try {
+            newDate = spf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        spf= new SimpleDateFormat("HH:mm");
+        date = spf.format(newDate);
+        return date;
     }
 }
