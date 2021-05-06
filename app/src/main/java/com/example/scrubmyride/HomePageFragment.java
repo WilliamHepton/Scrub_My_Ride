@@ -35,8 +35,7 @@ public class HomePageFragment extends Fragment {
         btn_booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bundleSend.putInt("customerID", 0);
-                navController.navigate(R.id.action_HomePage_to_Booking_WashChoice, bundleSend);
+                navController.navigate(R.id.action_HomePage_to_userLoginFragment);
             }
         });
 

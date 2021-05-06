@@ -35,7 +35,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public class CleanerPageFragment extends Fragment {
 
     CalendarView WorkCalendarCV;
-    String pickedDate, phoneNumber;
+    String pickedDate, email;
     int userID;
     Bundle bundleReceived, bundleSend;
     Cleaner cleaner;
@@ -63,9 +63,9 @@ public class CleanerPageFragment extends Fragment {
         if (bundleReceived.getInt("userID") != 0) {
             userID = bundleReceived.getInt("userID");
             this.getUser(getContext());
-        } else if (bundleReceived.getString("phoneNumber") != "0") {
-            phoneNumber = bundleReceived.getString("phoneNumber");
-            this.getUserByPhone(getContext());
+        } else if (bundleReceived.getString("email") != "0") {
+            email = bundleReceived.getString("email");
+            this.getUserByEmail(getContext());
         }
 
         Button btn_signOut= view.findViewById((R.id.btn_logout));
@@ -181,8 +181,8 @@ public class CleanerPageFragment extends Fragment {
         backgroundWorker.execute(type, userID);
     }
 
-    public void getUserByPhone(Context context) {
-        String type = "getUserByPhone";
+    public void getUserByEmail(Context context) {
+        String type = "getUserByEmail";
         BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
                 new AsyncResponse() {
                     @Override
@@ -196,6 +196,6 @@ public class CleanerPageFragment extends Fragment {
                         }
                     }
                 });
-        backgroundWorker.execute(type, phoneNumber);
+        backgroundWorker.execute(type, email);
     }
 }

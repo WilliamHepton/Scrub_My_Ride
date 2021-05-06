@@ -43,15 +43,16 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
         String getCleaners_url = "http://w-hepton.com.wwi6776.odns.fr/get_cleaners.php";
         String getSchedules_url = "http://w-hepton.com.wwi6776.odns.fr/get_schedules.php";
         String getUser_url = "http://w-hepton.com.wwi6776.odns.fr/get_user.php";
-        String getUserByPhone_url = "http://w-hepton.com.wwi6776.odns.fr/get_user_by_phone.php";
+        String getUserByEmail_url = "http://w-hepton.com.wwi6776.odns.fr/get_user_by_email.php";
         String getUserCarReg_url = "http://w-hepton.com.wwi6776.odns.fr/get_user_car_reg.php";
         String setUserCarReg_url = "http://w-hepton.com.wwi6776.odns.fr/set_user_car_reg.php";
         String invoice_url = "http://w-hepton.com.wwi6776.odns.fr/invoice.php";
         String cleaners_washType_url = "http://w-hepton.com.wwi6776.odns.fr/cleaner_washtype_prices.php";
+        String getCustomerInvoices_url = "http://w-hepton.com.wwi6776.odns.fr/get_customer_invoices.php";
 
         if (type.equals("login")) {
             try {
-                String phone = params[1].toString();
+                String email = params[1].toString();
                 String password = params[2].toString();
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -60,7 +61,7 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")
+                String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
                         + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
@@ -294,18 +295,18 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (type.equals(("getUserByPhone"))) {
+        } else if (type.equals(("getUserByEmail"))) {
 
             try {
-                String phoneNumber = params[1].toString();
-                URL url = new URL(getUserByPhone_url);
+                String email = params[1].toString();
+                URL url = new URL(getUserByEmail_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("phoneNumber", "UTF-8") + "=" + URLEncoder.encode(phoneNumber, "UTF-8");
+                String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -464,6 +465,39 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
                         + "&" + URLEncoder.encode("price1", "UTF-8") + "=" + URLEncoder.encode(prices[0], "UTF-8")
                         + "&" + URLEncoder.encode("price2", "UTF-8") + "=" + URLEncoder.encode(prices[1], "UTF-8")
                         + "&" + URLEncoder.encode("price3", "UTF-8") + "=" + URLEncoder.encode(prices[2], "UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (type.equals(("getCustomerInvoices"))) {
+
+            try {
+                String customerID = params[1].toString();
+
+                URL url = new URL(getCustomerInvoices_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("customerID", "UTF-8") + "=" + URLEncoder.encode(customerID, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

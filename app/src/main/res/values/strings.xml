@@ -28,6 +28,7 @@
     <string name="btn_cleanerSignup">Sign up as a cleaner</string>
     <string name="btn_userSignup">Sign up as a user</string>
     <string name="txt_becomeCustomer">Become a customer today!</string>
+    <string name="btn_register">Not yet a customer? Click here</string>
 
 
     <string name="txt_carReg">Car registration number</string>
@@ -92,6 +93,8 @@
     <string name="txt_desc">Write a short description about yourself</string>
     <string name="input_desc">Description</string>
     <string name="txt_verifyEmail">Please verify your email so you can start taking on bookings!</string>
+
+    <string name="txt_email">Your invoice will be sent to the email below</string>
 
 
 

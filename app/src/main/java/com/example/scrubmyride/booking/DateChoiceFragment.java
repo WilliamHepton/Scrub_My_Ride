@@ -73,6 +73,8 @@ public class DateChoiceFragment extends Fragment {
                 bundleSend.putString("selectedDateEnd", selectedDateEnd);
                 bundleSend.putString("address", bundleReceived.getString("address"));
                 bundleSend.putString("carReg", bundleReceived.getString("carReg"));
+                bundleSend.putString("email", bundleReceived.getString("email"));
+                bundleSend.putString("postcode", bundleReceived.getString("postcode"));
                 bundleSend.putInt("washTypeID", bundleReceived.getInt("washTypeID"));
                 bundleSend.putInt("customerID", customerID);
 
@@ -84,7 +86,9 @@ public class DateChoiceFragment extends Fragment {
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_Date_to_HomePage);
+                bundleSend = new Bundle();
+                bundleSend.putInt("userID", customerID);
+                navController.navigate(R.id.action_Booking_Date_to_userPageFragment, bundleSend);
             }
         });
 

@@ -19,7 +19,7 @@ import com.example.scrubmyride.R;
 
 public class CustomerLoginFragment extends Fragment {
 
-    EditText PhoneNumberET, PasswordET;
+    EditText EmailET, PasswordET;
     int userID;
     Bundle bundleSend;
 
@@ -30,7 +30,7 @@ public class CustomerLoginFragment extends Fragment {
     ) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f_customer_login, container, false);
-        PhoneNumberET = view.findViewById((R.id.input_phone));
+        EmailET = view.findViewById((R.id.input_email));
         PasswordET = view.findViewById((R.id.input_password));
         return view;
     }
@@ -45,7 +45,7 @@ public class CustomerLoginFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String phone = PhoneNumberET.getText().toString();
+            String email = EmailET.getText().toString();
             String password = PasswordET.getText().toString();
             String type = "login";
             BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
@@ -60,7 +60,7 @@ public class CustomerLoginFragment extends Fragment {
                             }
                         }
                     });
-            backgroundWorker.execute(type, phone, password);
+            backgroundWorker.execute(type, email, password);
             }
         });
 
@@ -69,6 +69,14 @@ public class CustomerLoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.action_userLoginFragment_to_homeLoginFragment);
+            }
+        });
+
+        Button btn_register = view.findViewById((R.id.btn_register));
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_userLoginFragment_to_userSignupFragment);
             }
         });
     }

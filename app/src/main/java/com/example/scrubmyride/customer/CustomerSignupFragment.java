@@ -68,7 +68,7 @@ public class CustomerSignupFragment extends Fragment {
                                     Log.d("ResponseFromAsync", (String) output);
                                     if (!"-1".equals((String) output)) {
                                         bundleSend = new Bundle();
-                                        bundleSend.putString("phoneNumber", phoneNumber);
+                                        bundleSend.putString("email", email);
                                         bundleSend.putString("carReg", carReg);
                                         navController.navigate(R.id.action_userSignupFragment_to_userPageFragment, bundleSend);
                                     }

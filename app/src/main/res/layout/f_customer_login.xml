@@ -49,10 +49,10 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_phone"
+                android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_phoneNumber" />
+                android:hint="@string/input_email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -67,13 +67,6 @@
                 android:hint="@string/input_password" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/txt_forgotPassword" />
-
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
@@ -81,5 +74,15 @@
             android:layout_marginTop="20dp"
             android:background="@color/green"
             android:text="@string/btn_login" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@color/accentColor"
+            android:text="@string/btn_register"
+            android:textSize="12sp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

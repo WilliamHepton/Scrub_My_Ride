@@ -21,6 +21,7 @@ import com.example.scrubmyride.R;
 public class CleanerSignupFragment extends Fragment {
 
     EditText FirstNameET, LastNameET, PhoneNumberET, EmailET, PostCodeET, PasswordET, PasswordConfirmET;
+    Bundle bundleSend;
 
     @Override
     public View onCreateView(
@@ -63,10 +64,10 @@ public class CleanerSignupFragment extends Fragment {
                             new AsyncResponse() {
                                 @Override
                                 public void processFinish(Object output) {
-                                    Log.d("ResponseFromAsync", (String) output);
                                     if (!"-1".equals((String) output)) {
-                                        Log.d("TestString", (String) output);
-                                        navController.navigate(R.id.action_Cleaner_Signup_to_Cleaner_Page);
+                                        bundleSend = new Bundle();
+                                        bundleSend.putString("email", email);
+                                        navController.navigate(R.id.action_Cleaner_Signup_to_Cleaner_Page, bundleSend);
                                     }
                                 }
                             });

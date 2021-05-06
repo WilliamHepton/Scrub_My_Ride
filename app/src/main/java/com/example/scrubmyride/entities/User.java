@@ -7,7 +7,7 @@ public class User {
     private String Email;
     private String PhoneNumber;
     private String Address;
-    private String Postcode;
+    private String PostCode;
     private boolean IsCleaner;
 
     public User(int UserID, String firstName, String lastName, String email, String phoneNumber, String address, String postcode, boolean isCleaner) {
@@ -17,7 +17,7 @@ public class User {
         this.Email = email;
         this.PhoneNumber = phoneNumber;
         this.Address = address;
-        this.Postcode = postcode;
+        this.PostCode = postcode;
         this.IsCleaner = isCleaner;
     }
 
@@ -46,11 +46,11 @@ public class User {
     }
 
     public String getPostcode() {
-        return Postcode;
+        return PostCode;
     }
 
     public void setPostcode(String postcode) {
-        this.Postcode = postcode;
+        this.PostCode = postcode;
     }
 
     public boolean isCleaner() {

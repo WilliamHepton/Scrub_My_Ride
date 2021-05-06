@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,12 +20,16 @@ import com.example.scrubmyride.AsyncResponse;
 import com.example.scrubmyride.BackgroundWorker;
 import com.example.scrubmyride.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class PaymentFragment extends Fragment {
 
     Bundle bundleReceived, bundleSend;
     int customerID, washTypeID, cleanerID;
-    String address, dateTimeStart, carReg;
+    String address, dateTimeStart, carReg, email, postcode;
     TextView cleanerIDTV, customerIDTV, selectedDateTimeTV, washTypeIDTV, customerAddressTV, carRegTV;
+    EditText emailET;
     Button payButton;
 
     @Override
@@ -40,8 +46,8 @@ public class PaymentFragment extends Fragment {
         washTypeIDTV = view.findViewById(R.id.txt_washTypeID);
         customerAddressTV = view.findViewById(R.id.txt_customerAddress);
         carRegTV = view.findViewById(R.id.txt_carReg);
-
         payButton = view.findViewById(R.id.btn_bookingPayment_pay);
+        emailET = view.findViewById(R.id.et_email);
 
         return view;
     }
@@ -54,7 +60,10 @@ public class PaymentFragment extends Fragment {
         dateTimeStart = bundleReceived.getString("dateTimeStart");
         address = bundleReceived.getString("address");
         carReg = bundleReceived.getString("carReg");
+        email = bundleReceived.getString("email");
+        postcode = bundleReceived.getString("postcode");
         customerID = bundleReceived.getInt("customerID");
+        Log.d("test1", customerID + "");
         cleanerID = bundleReceived.getInt("cleanerID");
         washTypeID = bundleReceived.getInt("washTypeID");
 
@@ -65,6 +74,10 @@ public class PaymentFragment extends Fragment {
         washTypeIDTV.setText(Integer.toString(washTypeID));
         customerAddressTV.setText(address);
 
+        if (email.length() > 1) {
+            emailET.setText(email);
+        }
+
         double price = 10;
         double serviceFee = price * 0.01;
 
@@ -74,7 +87,9 @@ public class PaymentFragment extends Fragment {
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_Payment_to_HomePage);
+                bundleSend = new Bundle();
+                bundleSend.putInt("userID", customerID);
+                navController.navigate(R.id.action_Booking_Payment_to_userPageFragment, bundleSend);
             }
         });
 
@@ -87,12 +102,31 @@ public class PaymentFragment extends Fragment {
                             @Override
                             public void processFinish(Object output) {
                                 if (!"-1".equals((String) output)) {
-                                    Log.d("test", "success");
+                                    CharSequence text = "You have successfully booked a car wash!";
+                                    int duration = Toast.LENGTH_LONG;
+                                    Toast toast = Toast.makeText(getContext(), text, duration);
+                                    toast.show();
+                                    CharSequence text2 = "Your new booking can be seen in your calendar";
+                                    int duration2 = Toast.LENGTH_LONG;
+                                    Toast toast2 = Toast.makeText(getContext(), text2, duration2);
+                                    toast2.show();
+                                    new Timer().schedule(
+                                            new TimerTask(){
+                                                @Override
+                                                public void run(){
+                                                    Log.d("test2", customerID + "");
+                                                    bundleSend = new Bundle();
+                                                    bundleSend.putInt("userID", customerID);
+                                                    navController.navigate(R.id.action_Booking_Payment_to_userPageFragment, bundleSend);
+                                                }
+
+                                            }, 2000);
                                 }
                             }
                         });
-                backgroundWorker.execute(type, customerID, cleanerID, dateTimeStart, price, washTypeID, address, " ", carReg, serviceFee);
+                backgroundWorker.execute(type, customerID, cleanerID, dateTimeStart, price, washTypeID, address, postcode, carReg, serviceFee);
             }
         });
     }
+    
 }

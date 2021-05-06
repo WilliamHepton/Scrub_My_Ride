@@ -31,6 +31,8 @@ public class WashChoiceFragment extends Fragment {
 
     int washTypeID, customerID;
     String carReg = "";
+    String email = "";
+    String postcode = "";
     Bundle bundleReceived, bundleSend;
     EditText carRegET;
 
@@ -53,12 +55,20 @@ public class WashChoiceFragment extends Fragment {
 
         bundleReceived = getArguments();
 
-        bundleReceived = getArguments();
-
         if (bundleReceived.getInt("customerID") != 0) {
             customerID = bundleReceived.getInt("customerID");
             this.getUserCarReg(getContext());
         }
+
+        if (bundleReceived.getString("email") != "0") {
+            email = bundleReceived.getString("email");
+        }
+
+        if (bundleReceived.getString("postcode") != "0") {
+            postcode = bundleReceived.getString("postcode");
+        }
+
+
         String regexCarReg = "(^[A-Z]{2}[0-9]{2}\\s?[A-Z]{3}$)|(^[A-Z][0-9]{1,3}[A-Z]{3}$)|(^[A-Z]{3}[0-9]{1,3}[A-Z]$)|(^[0-9]{1,4}[A-Z]{1,2}$)|(^[0-9]{1,3}[A-Z]{1,3}$)|(^[A-Z]{1,2}[0-9]{1,4}$)|(^[A-Z]{1,3}[0-9]{1,3}$)|(^[A-Z]{1,3}[0-9]{1,4}$)|(^[0-9]{3}[DX]{1}[0-9]{3}$)";
 
         final NavController navController = Navigation.findNavController(view);
@@ -75,6 +85,8 @@ public class WashChoiceFragment extends Fragment {
                     bundleSend.putInt("washTypeID", washTypeID);
                     bundleSend.putInt("customerID", customerID);
                     bundleSend.putString("carReg", carReg);
+                    bundleSend.putString("postcode", postcode);
+                    bundleSend.putString("email", email);
                     navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address, bundleSend);
                 }
 
@@ -93,6 +105,8 @@ public class WashChoiceFragment extends Fragment {
                     bundleSend.putInt("washTypeID", washTypeID);
                     bundleSend.putInt("customerID", customerID);
                     bundleSend.putString("carReg", carReg);
+                    bundleSend.putString("postcode", postcode);
+                    bundleSend.putString("email", email);
                     navController.navigate(R.id.action_Booking_WashChoice_to_Booking_Address, bundleSend);
                 }
             }
@@ -102,7 +116,9 @@ public class WashChoiceFragment extends Fragment {
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_WashChoice_to_HomePage);
+                bundleSend = new Bundle();
+                bundleSend.putInt("userID", customerID);
+                navController.navigate(R.id.action_Booking_WashChoice_to_userPageFragment, bundleSend);
             }
         });
 
@@ -121,7 +137,6 @@ public class WashChoiceFragment extends Fragment {
                 String regCapitalised = editable.toString().toUpperCase();
                 if (regCapitalised.matches(regexCarReg)) {
                     carReg = editable.toString();
-                    Log.d("test", carReg);
                 }
             }
         });
@@ -137,6 +152,7 @@ public class WashChoiceFragment extends Fragment {
                             Log.d("testwc", output.toString());
                             String carRegString = output.toString();
                             carRegET.setText(carRegString);
+                            carReg = carRegString;
                         }
                     }
                 });

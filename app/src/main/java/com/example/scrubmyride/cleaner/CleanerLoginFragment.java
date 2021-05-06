@@ -1,7 +1,6 @@
 package com.example.scrubmyride.cleaner;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import com.example.scrubmyride.R;
 
 public class CleanerLoginFragment extends Fragment {
 
-    EditText PhoneNumberET, PasswordET;
+    EditText EmailET, PasswordET;
     int userID;
     Bundle bundleSend;
 
@@ -32,7 +31,7 @@ public class CleanerLoginFragment extends Fragment {
     ) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f_cleaner_login, container, false);
-        PhoneNumberET = view.findViewById((R.id.input_phone));
+        EmailET = view.findViewById((R.id.input_email));
         PasswordET = view.findViewById((R.id.input_password));
         return view;
     }
@@ -47,7 +46,7 @@ public class CleanerLoginFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String phone = PhoneNumberET.getText().toString();
+            String email = EmailET.getText().toString();
             String password = PasswordET.getText().toString();
             String type = "login";
             BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
@@ -62,7 +61,7 @@ public class CleanerLoginFragment extends Fragment {
                             }
                         }
             });
-            backgroundWorker.execute(type, phone, password);
+            backgroundWorker.execute(type, email, password);
 
             }
         });

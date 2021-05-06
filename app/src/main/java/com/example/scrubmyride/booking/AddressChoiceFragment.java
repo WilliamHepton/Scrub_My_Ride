@@ -43,7 +43,7 @@ public class AddressChoiceFragment extends Fragment {
     Spinner AddressListS;
     Bundle bundleReceived, bundleSend;
     int washTypeID, customerID;
-    String carReg;
+    String carReg, email, postcode;
 
     @Override
     public View onCreateView(
@@ -66,6 +66,12 @@ public class AddressChoiceFragment extends Fragment {
         washTypeID = bundleReceived.getInt("washTypeID");
         customerID = bundleReceived.getInt("customerID");
         carReg = bundleReceived.getString("carReg");
+        email = bundleReceived.getString("email");
+        postcode = bundleReceived.getString("postcode");
+
+        if (postcode.length() > 1) {
+            PostCodeET.setText(postcode);
+        }
 
         final Context context = this.getContext();
 
@@ -93,6 +99,8 @@ public class AddressChoiceFragment extends Fragment {
                     bundleSend.putInt("washTypeID", washTypeID);
                     bundleSend.putInt("customerID", customerID);
                     bundleSend.putString("carReg", carReg);
+                    bundleSend.putString("email", email);
+                    bundleSend.putString("postcode", postcode);
                     navController.navigate(R.id.action_Booking_Address_to_Booking_Date, bundleSend);
                 }
             }
@@ -102,7 +110,9 @@ public class AddressChoiceFragment extends Fragment {
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Booking_Address_to_HomePage);
+                bundleSend = new Bundle();
+                bundleSend.putInt("userID", customerID);
+                navController.navigate(R.id.action_Booking_Address_to_userPageFragment, bundleSend);
             }
         });
 
