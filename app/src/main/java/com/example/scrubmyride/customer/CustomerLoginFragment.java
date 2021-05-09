@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,6 +60,11 @@ public class CustomerLoginFragment extends Fragment {
                                     bundleSend.putInt("userID", userID);
                                     navController.navigate(R.id.action_userLoginFragment_to_userPageFragment, bundleSend);
                                 }
+                            } else {
+                                CharSequence text = "Wrong email or password";
+                                int duration = Toast.LENGTH_LONG;
+                                Toast toast = Toast.makeText(getContext(), text, duration);
+                                toast.show();
                             }
                         }
                     });

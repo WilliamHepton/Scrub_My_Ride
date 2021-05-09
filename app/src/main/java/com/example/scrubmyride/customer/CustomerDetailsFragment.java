@@ -66,22 +66,26 @@ public class CustomerDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String newPassword = "0";
+                boolean saveChanges = true;
                 if (emailET.getText().toString().length() == 0) {
                     CharSequence text = "You must enter an email address";
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(getContext(), text, duration);
                     toast.show();
-                } else if (passwordET.getText().toString().length() > 0 && passwordConfirmET.getText().toString().length() > 0) {
+                    saveChanges = false;
+                }
+                if (passwordET.getText().toString().length() > 0 || passwordConfirmET.getText().toString().length() > 0) {
                     if (!(passwordET.getText().toString().equals(passwordConfirmET.getText().toString()))) {
                         CharSequence text = "Your passwords do not match";
                         int duration = Toast.LENGTH_LONG;
                         Toast toast = Toast.makeText(getContext(), text, duration);
                         toast.show();
-                    }
-                } else {
-                    if (passwordET.getText().toString().length() > 0) {
+                        saveChanges = false;
+                    } else {
                         newPassword = passwordET.getText().toString();
                     }
+                }
+                if (saveChanges) {
                     String type = "updateCustomer";
                     BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
                             new AsyncResponse() {
