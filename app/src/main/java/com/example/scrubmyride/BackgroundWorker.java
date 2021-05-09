@@ -37,19 +37,21 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
     @Override
     protected String doInBackground(Object... params) {
         String type = params[0].toString();
-        String login_url = "http://w-hepton.com.wwi6776.odns.fr/login.php";
-        String register_url = "http://w-hepton.com.wwi6776.odns.fr/register.php";
-        String schedule_url = "http://w-hepton.com.wwi6776.odns.fr/schedule.php";
-        String getCleaners_url = "http://w-hepton.com.wwi6776.odns.fr/get_cleaners.php";
-        String getSchedules_url = "http://w-hepton.com.wwi6776.odns.fr/get_schedules.php";
-        String getUser_url = "http://w-hepton.com.wwi6776.odns.fr/get_user.php";
-        String getUserByEmail_url = "http://w-hepton.com.wwi6776.odns.fr/get_user_by_email.php";
-        String getUserCarReg_url = "http://w-hepton.com.wwi6776.odns.fr/get_user_car_reg.php";
-        String setUserCarReg_url = "http://w-hepton.com.wwi6776.odns.fr/set_user_car_reg.php";
-        String invoice_url = "http://w-hepton.com.wwi6776.odns.fr/invoice.php";
-        String cleaners_washType_url = "http://w-hepton.com.wwi6776.odns.fr/cleaner_washtype_prices.php";
-        String getCustomerInvoices_url = "http://w-hepton.com.wwi6776.odns.fr/get_customer_invoices.php";
-        String getCleanerInvoices_url = "http://w-hepton.com.wwi6776.odns.fr/get_cleaner_invoices.php";
+        String login_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_login.php";
+        String register_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Input/set_user.php";
+        String schedule_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Input/set_schedule.php";
+        String getCleaners_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_cleaners.php";
+        String getSchedules_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_schedules.php";
+        String getUser_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_user.php";
+        String getUserByEmail_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_user_by_email.php";
+        String getUserCarReg_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_user_car_reg.php";
+        String setUserCarReg_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Input/set_user_car_reg.php";
+        String invoice_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Input/set_invoice.php";
+        String cleaners_washType_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Input/set_cleaner_washtype_prices.php";
+        String getCustomerInvoices_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_customer_invoices.php";
+        String getCleanerInvoices_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Select/get_cleaner_invoices.php";
+        String updateCustomer_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Update/update_customer.php";
+        String updateCleaner_url = "http://w-hepton.com.wwi6776.odns.fr/ScrubMyRide/Update/update_cleaner.php";
 
         if (type.equals("login")) {
             try {
@@ -164,6 +166,8 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
 
                         String startDateFormated = (new java.sql.Date(startTimeDate.getTimeInMillis())).toString() + " " + startTime + ":00";
                         String endDateFormated = (new java.sql.Date(endTimeDate.getTimeInMillis())).toString() + " " + endTime + ":00";
+
+                        Log.d("date", startDateFormated + " and end: " + endDateFormated);
 
                         URL url = new URL(schedule_url);
                         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -519,7 +523,7 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else if (type.equals(("getCleanerInvoices"))) {
+        } else if (type.equals(("getCleanerInvoices"))) {
 
             try {
                 String cleanerID = params[1].toString();
@@ -532,6 +536,96 @@ public class BackgroundWorker extends AsyncTask<Object, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("cleanerID", "UTF-8") + "=" + URLEncoder.encode(cleanerID, "UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (type.equals(("updateCustomer"))) {
+
+            try {
+                String userID = params[1].toString();
+                String carReg = params[2].toString().toUpperCase();
+                String email = params[3].toString();
+                String phoneNumber = params[4].toString();
+                String address = params[5].toString();
+                String postcode = params[6].toString().toUpperCase();
+                String password = params[7].toString();
+
+                URL url = new URL(updateCustomer_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8")
+                        + "&" + URLEncoder.encode("carReg", "UTF-8") + "=" + URLEncoder.encode(carReg, "UTF-8")
+                        + "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
+                        + "&" + URLEncoder.encode("phoneNumber", "UTF-8") + "=" + URLEncoder.encode(phoneNumber, "UTF-8")
+                        + "&" + URLEncoder.encode("postcode", "UTF-8") + "=" + URLEncoder.encode(postcode, "UTF-8")
+                        + "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8")
+                        + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (type.equals(("updateCleaner"))) {
+
+            try {
+                String userID = params[1].toString();
+                String email = params[2].toString();
+                String phoneNumber = params[3].toString();
+                String address = params[4].toString();
+                String postcode = params[5].toString().toUpperCase();
+                String password = params[6].toString();
+
+                Log.d("t", userID + " " + email + " " + phoneNumber + " " + address + " " + postcode + " " + password);
+
+                URL url = new URL(updateCleaner_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8")
+                        + "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
+                        + "&" + URLEncoder.encode("phoneNumber", "UTF-8") + "=" + URLEncoder.encode(phoneNumber, "UTF-8")
+                        + "&" + URLEncoder.encode("postcode", "UTF-8") + "=" + URLEncoder.encode(postcode, "UTF-8")
+                        + "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8")
+                        + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

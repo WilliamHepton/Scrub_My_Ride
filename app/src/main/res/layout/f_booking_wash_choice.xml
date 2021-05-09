@@ -50,7 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
-                android:hint="@string/txt_carRegHint" />
+                android:hint="@string/txt_carRegHint"
+                android:inputType="textShortMessage|textCapCharacters" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

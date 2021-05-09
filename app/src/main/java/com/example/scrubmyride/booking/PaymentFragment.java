@@ -20,6 +20,9 @@ import com.example.scrubmyride.AsyncResponse;
 import com.example.scrubmyride.BackgroundWorker;
 import com.example.scrubmyride.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,9 +30,8 @@ public class PaymentFragment extends Fragment {
 
     Bundle bundleReceived, bundleSend;
     int customerID, washTypeID, cleanerID;
-    String address, dateTimeStart, carReg, email, postcode;
-    TextView cleanerIDTV, customerIDTV, selectedDateTimeTV, washTypeIDTV, customerAddressTV, carRegTV;
-    EditText emailET;
+    String address, dateTimeStart, carReg, email, postcode, cleanerFullName, servicePrice;
+    TextView cleanerNameTV, servicePriceTV, carRegTV, serviceDateTV, washTypeTV, customerAddressTV;
     Button payButton;
 
     @Override
@@ -40,14 +42,14 @@ public class PaymentFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f_booking_payment, container, false);
 
-        cleanerIDTV = view.findViewById(R.id.txt_cleanerID);
-        customerIDTV = view.findViewById(R.id.txt_customerID);
-        selectedDateTimeTV = view.findViewById(R.id.txt_selectedDateTime);
-        washTypeIDTV = view.findViewById(R.id.txt_washTypeID);
-        customerAddressTV = view.findViewById(R.id.txt_customerAddress);
+        cleanerNameTV = view.findViewById(R.id.txt_cleanerName);
+        servicePriceTV = view.findViewById(R.id.txt_servicePrice);
         carRegTV = view.findViewById(R.id.txt_carReg);
+        serviceDateTV = view.findViewById(R.id.txt_serviceDate);
+        washTypeTV = view.findViewById(R.id.txt_carWashType);
+        customerAddressTV = view.findViewById(R.id.txt_addressCustomer);
+
         payButton = view.findViewById(R.id.btn_bookingPayment_pay);
-        emailET = view.findViewById(R.id.et_email);
 
         return view;
     }
@@ -62,21 +64,23 @@ public class PaymentFragment extends Fragment {
         carReg = bundleReceived.getString("carReg");
         email = bundleReceived.getString("email");
         postcode = bundleReceived.getString("postcode");
+        cleanerFullName = bundleReceived.getString("cleanerFullName");
         customerID = bundleReceived.getInt("customerID");
-        Log.d("test1", customerID + "");
         cleanerID = bundleReceived.getInt("cleanerID");
         washTypeID = bundleReceived.getInt("washTypeID");
+        servicePrice = bundleReceived.getString("servicePrice");
 
-        cleanerIDTV.setText(Integer.toString(cleanerID));
-        customerIDTV.setText(Integer.toString(customerID));
-        carRegTV.setText(carReg);
-        selectedDateTimeTV.setText(dateTimeStart);
-        washTypeIDTV.setText(Integer.toString(washTypeID));
-        customerAddressTV.setText(address);
-
-        if (email.length() > 1) {
-            emailET.setText(email);
+        cleanerNameTV.setText("Name of the cleaner: " + cleanerFullName);
+        servicePriceTV.setText("Service price: £ " + servicePrice);
+        carRegTV.setText("The registration number of the car to be cleaned: " + carReg);
+        serviceDateTV.setText("Time and day: " + SQLDateToDisplayDate(dateTimeStart));
+        if(washTypeID == 1){
+            washTypeTV.setText("Type of car wash: Inside clean");
+        } else if (washTypeID == 2){
+            washTypeTV.setText("Type of car wash: Inside clean & Outside Wash");
         }
+
+        customerAddressTV.setText("Your address: " + address);
 
         double price = 10;
         double serviceFee = price * 0.01;
@@ -127,6 +131,25 @@ public class PaymentFragment extends Fragment {
                 backgroundWorker.execute(type, customerID, cleanerID, dateTimeStart, price, washTypeID, address, postcode, carReg, serviceFee);
             }
         });
+    }
+
+    public String SQLDateToDisplayDate(String date){
+        Log.d("date", date);
+        SimpleDateFormat spf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String displayDate = "";
+        Date newDate= null;
+        try {
+            newDate = spf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        spf= new SimpleDateFormat("HH:mm");
+        date = spf.format(newDate);
+        displayDate = "At " + date +" on the ";
+        spf= new SimpleDateFormat("dd/MM/yyyy");
+        date = spf.format(newDate);
+        displayDate += date;
+        return displayDate;
     }
     
 }

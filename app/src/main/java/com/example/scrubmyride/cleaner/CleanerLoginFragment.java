@@ -1,6 +1,7 @@
 package com.example.scrubmyride.cleaner;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class CleanerLoginFragment extends Fragment {
                     new AsyncResponse() {
                         @Override
                         public void processFinish(Object output) {
+                            Log.d("output", output.toString());
                             if (!"-1".equals((String) output)) {
                                 userID = Integer.parseInt(output.toString());
                                 bundleSend = new Bundle();

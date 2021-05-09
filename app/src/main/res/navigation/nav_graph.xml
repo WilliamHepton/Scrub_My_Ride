@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_Cleaner_Details_to_Cleaner_Page"
             app:destination="@id/Cleaner_Page" />
+        <argument
+            android:name="userID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/HomePage"
@@ -236,6 +239,11 @@
         <action
             android:id="@+id/action_Booking_Payment_to_userPageFragment2"
             app:destination="@id/userPageFragment" />
+        <argument
+            android:name="cleanerFullName"
+            app:argType="string" />
+        <argument android:name="servicePrice"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/userSignupFragment"
@@ -257,6 +265,9 @@
         <action
             android:id="@+id/action_userDetailsFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
+        <argument
+            android:name="userID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/userPageFragment"

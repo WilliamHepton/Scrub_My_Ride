@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:autofillHints="@string/txt_enterPrice"
     android:background="@color/colorPrimary">
 
     <LinearLayout
@@ -44,17 +45,18 @@
                 android:id="@+id/txt_outsideWash"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="@string/txt_outsideWash"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_outsideWash_price"
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="text" />
+                android:hint="@string/txt_enterPrice"
+                android:inputType="textShortMessage|text" />
 
             <TextView
                 android:id="@+id/txt_pound1"
@@ -76,17 +78,18 @@
                 android:id="@+id/txt_outsideInsideWash"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="@string/txt_outInWash"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_outsideInsideWash_price"
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="text" />
+                android:hint="@string/txt_enterPrice"
+                android:inputType="textShortMessage|text" />
 
             <TextView
                 android:id="@+id/txt_pound2"
@@ -108,17 +111,18 @@
                 android:id="@+id/txt_insideWash"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="@string/txt_insideWash"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_insideWash_price"
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="text" />
+                android:hint="@string/txt_enterPrice"
+                android:inputType="textShortMessage|text" />
 
             <TextView
                 android:id="@+id/txt_pound3"

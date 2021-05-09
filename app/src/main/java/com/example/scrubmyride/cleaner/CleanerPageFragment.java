@@ -147,7 +147,6 @@ public class CleanerPageFragment extends Fragment {
         TextView clientPhone = popupView.findViewById((R.id.txt_popup5));
         TextView servicePrice = popupView.findViewById((R.id.txt_popup6));
 
-
         InvoiceDisplay customerOnSelectedDay = cleanerInvoices.stream().filter(x -> SQLDateToEventCalendarDate(x.getServiceTimeStart()).equals(date)).findFirst().orElse(null);
 
         if(customerOnSelectedDay != null){
@@ -160,8 +159,6 @@ public class CleanerPageFragment extends Fragment {
         } else {
             clientName.setText("No bookings on this day, yet!");
         }
-
-
 
         // create the popup window
         int width = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250, getResources().getDisplayMetrics())); // LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -271,11 +268,7 @@ public class CleanerPageFragment extends Fragment {
     }
 
     public void setCalendarEvents() {
-        for (int j = 0; j < 30; j++){
-            calendar.removeEvent(new Event((currentTimeMillis() + TimeUnit.DAYS.toMillis(j)), "CW", Color.RED));
-            j++;
-        }
-        for(int i = 0; i< cleanerInvoices.size(); i++) { // !!!!!!!!!!!! change getservice time to the same format as currenttimemillis above
+        for(int i = 0; i< cleanerInvoices.size(); i++) {
             Event event = new Event(DateStringToMillis(cleanerInvoices.get(i).getServiceTimeStart()), "CW", Color.RED);
             calendar.addEvent(event);
         }

@@ -149,8 +149,7 @@ public class WashChoiceFragment extends Fragment {
                     @Override
                     public void processFinish(Object output) {
                         if (!"-1".equals((String) output)) {
-                            Log.d("testwc", output.toString());
-                            String carRegString = output.toString();
+                            String carRegString = output.toString().toUpperCase();
                             carRegET.setText(carRegString);
                             carReg = carRegString;
                         }

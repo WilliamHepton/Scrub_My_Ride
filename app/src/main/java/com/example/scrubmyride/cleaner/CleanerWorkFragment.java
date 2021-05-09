@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -104,47 +105,62 @@ public class CleanerWorkFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                String type = "schedule";
-                HashMap<String, String> startTimesList = new HashMap<String, String>();
-                HashMap<String, String> endTimesList = new HashMap<String, String>();
-                startTimesList.put("2", monStartTime.getText().toString());
-                startTimesList.put("3", tueStartTime.getText().toString());
-                startTimesList.put("4", wedStartTime.getText().toString());
-                startTimesList.put("5", thuStartTime.getText().toString());
-                startTimesList.put("6", friStartTime.getText().toString());
-                startTimesList.put("7", satStartTime.getText().toString());
-                startTimesList.put("1", sunStartTime.getText().toString());
-                endTimesList.put("2", monEndTime.getText().toString());
-                endTimesList.put("3", tueEndTime.getText().toString());
-                endTimesList.put("4", wedEndTime.getText().toString());
-                endTimesList.put("5", thuEndTime.getText().toString());
-                endTimesList.put("6", friEndTime.getText().toString());
-                endTimesList.put("7", satEndTime.getText().toString());
-                endTimesList.put("1", sunEndTime.getText().toString());
+                if(verifyStartAndEndTime(monStartTime.getText().toString(), monEndTime.getText().toString()) &&
+                        verifyStartAndEndTime(tueStartTime.getText().toString(), tueEndTime.getText().toString()) &&
+                        verifyStartAndEndTime(wedStartTime.getText().toString(), wedEndTime.getText().toString()) &&
+                        verifyStartAndEndTime(thuStartTime.getText().toString(), thuEndTime.getText().toString()) &&
+                        verifyStartAndEndTime(friStartTime.getText().toString(), friEndTime.getText().toString()) &&
+                        verifyStartAndEndTime(satStartTime.getText().toString(), satEndTime.getText().toString()) &&
+                        verifyStartAndEndTime(sunStartTime.getText().toString(), sunEndTime.getText().toString()))
+                {
+                    String type = "schedule";
+                    HashMap<String, String> startTimesList = new HashMap<String, String>();
+                    HashMap<String, String> endTimesList = new HashMap<String, String>();
+                    startTimesList.put("2", monStartTime.getText().toString());
+                    startTimesList.put("3", tueStartTime.getText().toString());
+                    startTimesList.put("4", wedStartTime.getText().toString());
+                    startTimesList.put("5", thuStartTime.getText().toString());
+                    startTimesList.put("6", friStartTime.getText().toString());
+                    startTimesList.put("7", satStartTime.getText().toString());
+                    startTimesList.put("1", sunStartTime.getText().toString());
+                    endTimesList.put("2", monEndTime.getText().toString());
+                    endTimesList.put("3", tueEndTime.getText().toString());
+                    endTimesList.put("4", wedEndTime.getText().toString());
+                    endTimesList.put("5", thuEndTime.getText().toString());
+                    endTimesList.put("6", friEndTime.getText().toString());
+                    endTimesList.put("7", satEndTime.getText().toString());
+                    endTimesList.put("1", sunEndTime.getText().toString());
 
-                startTimesList.forEach((k,v)-> {
-                    if(v.length() == 0) {
-                        startTimesList.put(k, "-1");
-                    }
-                });
+                    startTimesList.forEach((k,v)-> {
+                        if(v.length() == 0) {
+                            startTimesList.put(k, "-1");
+                        }
+                    });
 
-                endTimesList.forEach((k,v)-> {
-                    if(v.length() == 0) {
-                        endTimesList.put(k, "-1");
-                    }
-                });
-                BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
-                        new AsyncResponse() {
-                            @Override
-                            public void processFinish(Object output) {
-                                if (!"-1".equals((String) output)) {
-                                    bundleSend = new Bundle();
-                                    bundleSend.putInt("userID", bundleReceived.getInt("userID"));
-                                    navController.navigate(R.id.action_Cleaner_Work_to_Cleaner_Page, bundleSend);
+                    endTimesList.forEach((k,v)-> {
+                        if(v.length() == 0) {
+                            endTimesList.put(k, "-1");
+                        }
+                    });
+                    BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
+                            new AsyncResponse() {
+                                @Override
+                                public void processFinish(Object output) {
+                                    if (!"-1".equals((String) output)) {
+                                        bundleSend = new Bundle();
+                                        bundleSend.putInt("userID", bundleReceived.getInt("userID"));
+                                        navController.navigate(R.id.action_Cleaner_Work_to_Cleaner_Page, bundleSend);
+                                    }
                                 }
-                            }
-                        });
-                backgroundWorker.execute(type, userID, startTimesList, endTimesList);
+                            });
+                    backgroundWorker.execute(type, userID, startTimesList, endTimesList);
+                } else {
+                    CharSequence text = "Please check that your starting hours are not after your finishing hours";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    toast.show();
+                }
+
             }
         });
 
@@ -914,6 +930,31 @@ public class CleanerWorkFragment extends Fragment {
             }
         });
 
+    }
+
+    public boolean verifyStartAndEndTime(String startTime, String endTime){
+        boolean isOkay = true;
+        if(startTime.length() > 0  && endTime.length() > 0){
+            int startTimeHours = Integer.parseInt(startTime.substring(0, startTime.indexOf(':')));
+            int startTimeMinutes = Integer.parseInt(startTime.substring(startTime.indexOf(':')+1));
+            int endTimeHours = Integer.parseInt(endTime.substring(0, endTime.indexOf(':')));
+            int endTimeMinutes = Integer.parseInt(endTime.substring(endTime.indexOf(':')+1));
+            Log.d("hours", startTimeHours + " " + endTimeHours);
+            if (startTimeHours > endTimeHours) {
+                isOkay = false;
+            }
+            if (startTimeHours == endTimeHours && startTimeMinutes > endTimeMinutes){
+                isOkay = false;
+            }
+        }
+
+        if (startTime.length() > 0 && endTime.length() == 0){
+            isOkay = false;
+        }
+        if (startTime.length() == 0 && endTime.length() > 0){
+            isOkay = false;
+        }
+        return isOkay;
     }
 
 }

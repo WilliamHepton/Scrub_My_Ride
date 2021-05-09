@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,17 +73,26 @@ public class CleanerChoiceFragment extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bundleSend = new Bundle();
-                bundleSend.putString("dateTimeStart", dateTimeStart);
-                bundleSend.putString("address", bundleReceived.getString("address"));
-                bundleSend.putString("carReg", bundleReceived.getString("carReg"));
-                bundleSend.putString("email", bundleReceived.getString("email"));
-                bundleSend.putString("postcode", bundleReceived.getString("postcode"));
-                bundleSend.putInt("washTypeID", washTypeID);
-                bundleSend.putInt("customerID", customerID);
-                bundleSend.putInt("cleanerID", selectedCleaner.getUserID());
+                if (selectedCleaner == null) {
+                    CharSequence text = "Please try again";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    toast.show();
+                } else {
+                    bundleSend = new Bundle();
+                    bundleSend.putString("dateTimeStart", dateTimeStart);
+                    bundleSend.putString("address", bundleReceived.getString("address"));
+                    bundleSend.putString("carReg", bundleReceived.getString("carReg"));
+                    bundleSend.putString("email", bundleReceived.getString("email"));
+                    bundleSend.putString("postcode", bundleReceived.getString("postcode"));
+                    bundleSend.putInt("washTypeID", washTypeID);
+                    bundleSend.putInt("customerID", customerID);
+                    bundleSend.putInt("cleanerID", selectedCleaner.getUserID());
+                    bundleSend.putString("servicePrice", selectedCleaner.getPrice().toString());
+                    bundleSend.putString("cleanerFullName", (selectedCleaner.getFirstName() + " " + selectedCleaner.getLastName()));
 
-                navController.navigate(R.id.action_Booking_CleanerChoice_to_Booking_Payment, bundleSend);
+                    navController.navigate(R.id.action_Booking_CleanerChoice_to_Booking_Payment, bundleSend);
+                }
             }
         });
 
@@ -117,7 +127,7 @@ public class CleanerChoiceFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime tempDate = LocalDateTime.parse(selectedCleaner.getStartDate(), dateFormat);
-                String tempTime = parentView.getItemAtPosition(position).toString().substring(0,5);
+                String tempTime = parentView.getItemAtPosition(position).toString().substring(0,parentView.getItemAtPosition(position).toString().indexOf(' '));
                 dateTimeStart = tempDate.getYear() + "-" + tempDate.getMonthValue() + "-" + tempDate.getDayOfMonth() + " " + tempTime + ":00";
             }
 
@@ -168,11 +178,14 @@ public class CleanerChoiceFragment extends Fragment {
                                     cleaners.add(newCleaner);
                                     cleanerStringDisplay[i] = firstName + " " + lastName + " - " + price.toString() + "£";
                                 }
-
+                                selectedCleaner = cleaners.get(0);
+                                //dateTimeStart = cleaners.get(0).getStartDate();
                                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, cleanerStringDisplay);
                                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 arrayAdapter.notifyDataSetChanged();
                                 CleanerListS.setAdapter(arrayAdapter);
+
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -184,7 +197,6 @@ public class CleanerChoiceFragment extends Fragment {
     }
 
     public void getHours(Context context) {
-
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime startTime = LocalDateTime.parse(selectedCleaner.getStartDate(), dateFormat);
@@ -199,39 +211,39 @@ public class CleanerChoiceFragment extends Fragment {
         if((endMinute - startMinute) > 0) {
             loops += (endMinute - startMinute)/15;
         }
+        if(loops > 0) {
+            String[] cleanerStringDisplay = new String[loops];
+            String displayTimeStart;
+            String displayTimeEnd;
+            int displayHour = startHour;
+            int currentMinutes = startMinute;
+            for(int i = 0; i < loops; i++){
+                displayTimeStart = displayHour + ":" + currentMinutes;
 
-        String[] cleanerStringDisplay = new String[loops];
-        String displayTimeStart;
-        String displayTimeEnd;
-        int displayHour = startHour;
-        int currentMinutes = startMinute;
-        for(int i = 0; i < loops; i++){
-            displayTimeStart = displayHour + ":" + currentMinutes;
-
-            if(currentMinutes < 10){
-                displayTimeStart = displayHour + ":0" + currentMinutes;
-            }
-
-            if(currentMinutes >= 45){
-                displayTimeEnd = displayHour + 1 + ":" + (currentMinutes+15 - 60);
-                if (((currentMinutes+15) - 60) < 10) {
-                    displayTimeEnd = displayHour + ":0" + (currentMinutes+15 - 60);
+                if(currentMinutes < 10){
+                    displayTimeStart = displayHour + ":0" + currentMinutes;
                 }
-            } else {
-                displayTimeEnd = displayHour + ":" + (currentMinutes+15);
-            }
-            cleanerStringDisplay[i] = displayTimeStart + " to " + displayTimeEnd;
-            currentMinutes += 15;
-            if (currentMinutes >= 60) {
-                displayHour++;
-                currentMinutes = currentMinutes - 60;
-            }
-        }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, cleanerStringDisplay);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        arrayAdapter.notifyDataSetChanged();
-        CleanerHoursS.setAdapter(arrayAdapter);
+                if(currentMinutes >= 45){
+                    displayTimeEnd = displayHour + 1 + ":" + (currentMinutes+15 - 60);
+                    if (((currentMinutes+15) - 60) < 10) {
+                        displayTimeEnd = displayHour + ":0" + (currentMinutes+15 - 60);
+                    }
+                } else {
+                    displayTimeEnd = displayHour + ":" + (currentMinutes+15);
+                }
+                cleanerStringDisplay[i] = displayTimeStart + " to " + displayTimeEnd;
+                currentMinutes += 15;
+                if (currentMinutes >= 60) {
+                    displayHour++;
+                    currentMinutes = currentMinutes - 60;
+                }
+            }
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, cleanerStringDisplay);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            arrayAdapter.notifyDataSetChanged();
+            CleanerHoursS.setAdapter(arrayAdapter);
+        }
     }
 
     public boolean getCleanerByName(String fullName) {

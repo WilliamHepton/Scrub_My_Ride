@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -70,23 +71,30 @@ public class CleanerWashTypesFragment extends Fragment {
             public void onClick(View view) {
 
                 String type = "cleaners_washType";
+                String regexDouble = "[0-9]{1,13}(\\.[0-9]*)?";
+                if(outsideWashPrice.getText().toString().matches(regexDouble) && outsideInsideWashPrice.getText().toString().matches(regexDouble)  && insideWashPrice.getText().toString().matches(regexDouble)){
+                    prices.add(Double.parseDouble(outsideWashPrice.getText().toString()));
+                    prices.add(Double.parseDouble(outsideInsideWashPrice.getText().toString()));
+                    prices.add(Double.parseDouble(insideWashPrice.getText().toString()));
 
-                prices.add(Double.parseDouble(outsideWashPrice.getText().toString()));
-                prices.add(Double.parseDouble(outsideInsideWashPrice.getText().toString()));
-                prices.add(Double.parseDouble(insideWashPrice.getText().toString()));
-
-                BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
-                        new AsyncResponse() {
-                            @Override
-                            public void processFinish(Object output) {
-                                if (!"-1".equals((String) output)) {
-                                    bundleSend = new Bundle();
-                                    bundleSend.putInt("userID", bundleReceived.getInt("userID"));
-                                    navController.navigate(R.id.action_cleanerWashTypesFragment_to_Cleaner_Page, bundleSend);
+                    BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
+                            new AsyncResponse() {
+                                @Override
+                                public void processFinish(Object output) {
+                                    if (!"-1".equals((String) output)) {
+                                        bundleSend = new Bundle();
+                                        bundleSend.putInt("userID", bundleReceived.getInt("userID"));
+                                        navController.navigate(R.id.action_cleanerWashTypesFragment_to_Cleaner_Page, bundleSend);
+                                    }
                                 }
-                            }
-                        });
-                backgroundWorker.execute(type, userID, prices);
+                            });
+                    backgroundWorker.execute(type, userID, prices);
+                } else {
+                    CharSequence text = "Please only enter numbers (ex: 12.52)";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    toast.show();
+                }
             }
         });
 
@@ -102,7 +110,4 @@ public class CleanerWashTypesFragment extends Fragment {
 
 
     }
-
-
-
 }

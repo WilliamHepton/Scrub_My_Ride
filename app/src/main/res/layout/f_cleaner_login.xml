@@ -50,6 +50,7 @@
             android:id="@+id/imageView"
             android:layout_width="250dp"
             android:layout_height="150dp"
+            android:layout_marginBottom="20dp"
             android:contentDescription="@string/img_logo"
             app:srcCompat="@drawable/logo" />
 
@@ -62,7 +63,8 @@
                 android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_email" />
+                android:hint="@string/input_email"
+                android:inputType="textShortMessage" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -74,21 +76,16 @@
                 android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_password" />
+                android:hint="@string/input_password"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/txt_forgotPassword" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="70dp"
             android:background="@color/green"
             android:text="@string/btn_login" />
     </LinearLayout>

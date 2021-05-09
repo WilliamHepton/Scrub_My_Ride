@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,12 +56,23 @@ public class CustomerSignupFragment extends Fragment {
                 String lastName = LastNameET.getText().toString();
                 String phoneNumber = PhoneNumberET.getText().toString();
                 String email = EmailET.getText().toString();
-                String postCode = PostCodeET.getText().toString();
-                String carReg = CarRegET.getText().toString();
+                String postCode = PostCodeET.getText().toString().toUpperCase();
+                String carReg = CarRegET.getText().toString().toUpperCase();
                 String password = PasswordET.getText().toString();
                 String passwordConfirm = PasswordConfirmET.getText().toString();
                 String type = "register";
-                if (password.equals(passwordConfirm)) {
+                if (!password.equals(passwordConfirm) && password.length() > 0) {
+                    CharSequence text = "Your passwords do not match";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    toast.show();
+                } else if (email.length() == 0) {
+                    CharSequence text = "You must enter an email address";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    toast.show();
+                } else {
+
                     BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
                             new AsyncResponse() {
                                 @Override

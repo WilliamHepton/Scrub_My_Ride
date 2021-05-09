@@ -48,7 +48,7 @@
     <string name="txt_selectDate">Select a date and time for the cleaner to come</string>
 
     <string name="txt_selectPayment">Review your booking</string>
-    <string name="btn_pay">Book</string>
+    <string name="btn_pay">Book your car wash</string>
 
     <string name="txt_forgotPassword">Forgot password?</string>
     <string name="input_phoneNumberEnter">Enter your phone number</string>
@@ -69,17 +69,23 @@
     <string name="input_phoneNumber">Phone number</string>
     <string name="input_email">Email</string>
     <string name="input_postCode">Post Code</string>
+    <string name="input_editAddress">Address</string>
     <string name="input_carReg">Car registration number</string>
     <string name="input_password">Password</string>
-    <string name="input_passwordConfirm">Confirm passowrd</string>
+    <string name="input_newPassword">New password</string>
+    <string name="input_changePassword">Change your password</string>
+    <string name="input_passwordConfirm">Confirm password</string>
     <string name="txt_registerCustomerPage">Customer Register Page</string>
     <string name="txt_registerCleanerPage">Cleaner Register Page</string>
+    <string name="txt_registerChoicePage">Register as a customer or a cleaner</string>
+    <string name="txt_LoginChoicerPage">Login as a customer or a cleaner</string>
 
     <string name="txt_checkAddress">Edit or verify the address below</string>
 
     <string name="txt_poundSign">£</string>
 
-    <string name="txt_myDetails">My details</string>
+    <string name="txt_myDetails">Edit my details</string>
+    <string name="txt_btnSaveAll">Save all changes</string>
 
     <string name="txt_scheduleCalendar">Schedule my calendar</string>
     <string name="txt_chooseWorkingHours">Choose your working hours</string>
@@ -93,6 +99,8 @@
     <string name="txt_addDate">Add working day schedule</string>
     <string name="txt_timeStart">Start shift</string>
     <string name="txt_timeEnd">End shift</string>
+
+    <string name="txt_enterPrice">00.00</string>
 
     <string name="txt_desc">Write a short description about yourself</string>
     <string name="input_desc">Description</string>

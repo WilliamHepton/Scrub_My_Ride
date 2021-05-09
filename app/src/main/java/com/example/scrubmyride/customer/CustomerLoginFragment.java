@@ -53,10 +53,12 @@ public class CustomerLoginFragment extends Fragment {
                         @Override
                         public void processFinish(Object output) {
                             if (!"-1".equals((String) output)) {
-                                userID = Integer.parseInt(output.toString());
-                                bundleSend = new Bundle();
-                                bundleSend.putInt("userID", userID);
-                                navController.navigate(R.id.action_userLoginFragment_to_userPageFragment, bundleSend);
+                                if(output != null){
+                                    userID = Integer.parseInt(output.toString());
+                                    bundleSend = new Bundle();
+                                    bundleSend.putInt("userID", userID);
+                                    navController.navigate(R.id.action_userLoginFragment_to_userPageFragment, bundleSend);
+                                }
                             }
                         }
                     });

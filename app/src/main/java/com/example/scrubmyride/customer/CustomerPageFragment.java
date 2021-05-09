@@ -116,7 +116,9 @@ public class CustomerPageFragment extends Fragment {
         btn_editDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_userPageFragment_to_userDetailsFragment);
+                bundleSend = new Bundle();
+                bundleSend.putInt("userID", userID);
+                navController.navigate(R.id.action_userPageFragment_to_userDetailsFragment, bundleSend);
             }
         });
 
