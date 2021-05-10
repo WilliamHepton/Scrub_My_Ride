@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".booking.WashChoiceFragment">
 
     <LinearLayout
@@ -13,7 +14,7 @@
         android:orientation="horizontal">
 
         <Space
-            android:layout_width="253dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
@@ -21,7 +22,9 @@
             android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/red"
             android:text="@string/btn_close" />
 
     </LinearLayout>
@@ -32,23 +35,39 @@
         android:gravity="center|center_horizontal|center_vertical"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/divider"
+            android:gravity="center"
+            android:text="@string/txt_LoginChoicerPage"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
         <ImageView
             android:id="@+id/img_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="20dp"
             android:contentDescription="@string/img_logo"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/logo" />
 
         <Button
             android:id="@+id/btn_userLogin"
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@color/accentColor"
             android:text="@string/btn_userLogin" />
 
         <Button
             android:id="@+id/btn_cleanerLogin"
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:background="@color/accentColor"
             android:text="@string/btn_cleanerLogin" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

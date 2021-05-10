@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,15 +11,18 @@
         android:orientation="horizontal">
 
         <Space
-            android:layout_width="253dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorPrimary" />
 
         <Button
             android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/red"
             android:text="@string/btn_close" />
 
     </LinearLayout>
@@ -30,20 +34,273 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_myWork"
+            android:id="@+id/txt_scheduleCalendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_myWork" />
+            android:text="@string/txt_scheduleCalendar"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <CalendarView
-            android:id="@+id/calendarView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txt_chooseWorkingDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_chooseWorkingHours"
+            android:textSize="18sp" />
+
+        <TableLayout
+            android:id="@+id/table_dates"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TableRow
+                android:id="@+id/trow_monday"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4DB6AC">
+
+                <TextView
+                    android:id="@+id/txt_mondayHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/txt_monday" />
+
+                <EditText
+                    android:id="@+id/et_monStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeStart"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_monEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeEnd"
+                    android:inputType="textPersonName" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trow_tuesday"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#66c5bc">
+
+                <TextView
+                    android:id="@+id/txt_tuesdayHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/txt_tuesday" />
+
+                <EditText
+                    android:id="@+id/et_tueStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeStart"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_tueEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeEnd"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trow_wednesday"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4DB6AC">
+
+                <TextView
+                    android:id="@+id/txt_wednesdayHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/txt_wednesday" />
+
+                <EditText
+                    android:id="@+id/et_wedStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeStart"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_wedEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeEnd"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trow_thursday"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#66c5bc">
+
+                <TextView
+                    android:id="@+id/txt_thursdayHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/txt_thursday" />
+
+                <EditText
+                    android:id="@+id/et_thuStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeStart"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_thuEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeEnd"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trow_friday"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4DB6AC">
+
+                <TextView
+                    android:id="@+id/txt_fridayHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/txt_friday" />
+
+                <EditText
+                    android:id="@+id/et_friStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeStart"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_friEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeEnd"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trow_saturday"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#66c5bc">
+
+                <TextView
+                    android:id="@+id/txt_saturdayHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/txt_saturday" />
+
+                <EditText
+                    android:id="@+id/et_satStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeStart"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_satEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeEnd"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trow_sunday"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4DB6AC">
+
+                <TextView
+                    android:id="@+id/txt_sundayHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/txt_sunday" />
+
+                <EditText
+                    android:id="@+id/et_sunStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeStart"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_sunEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/txt_timeEnd"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+        </TableLayout>
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/green"
             android:text="@string/btn_save" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
