@@ -212,7 +212,7 @@
     </fragment>
     <fragment
         android:id="@+id/Booking_Payment"
-        android:name="com.example.scrubmyride.booking.PaymentFragment"
+        android:name="com.example.scrubmyride.booking.BookingFragment"
         android:label="@string/payment_label"
         tools:layout="@layout/f_booking_payment">
         <argument

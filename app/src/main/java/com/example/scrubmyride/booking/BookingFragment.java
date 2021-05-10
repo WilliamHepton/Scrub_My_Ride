@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PaymentFragment extends Fragment {
+public class BookingFragment extends Fragment {
 
     Bundle bundleReceived, bundleSend;
     int customerID, washTypeID, cleanerID;

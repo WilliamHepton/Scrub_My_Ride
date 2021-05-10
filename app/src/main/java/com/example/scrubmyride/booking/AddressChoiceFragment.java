@@ -39,7 +39,6 @@ import java.util.Scanner;
 
 public class AddressChoiceFragment extends Fragment {
 
-
     EditText PostCodeET, AddressET;
     Spinner AddressListS;
     Bundle bundleReceived, bundleSend;
@@ -119,6 +118,7 @@ public class AddressChoiceFragment extends Fragment {
             }
         });
 
+        //On postcode change, find addresses near that postcode and put them in a list using Geocoder
         PostCodeET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
@@ -216,6 +216,8 @@ public class AddressChoiceFragment extends Fragment {
         });
     }
 
+    // Retrueve a list of addresses based of a postcode using Geocoder and reverse geocoding
+    // Formats results into a nice string to display
     public void getAddressesFromPostCode(List<String> addresses , Geocoder geocoder){
         addresses.clear();
         List<Address> location = null;

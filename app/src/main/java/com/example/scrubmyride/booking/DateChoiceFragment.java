@@ -108,6 +108,7 @@ public class DateChoiceFragment extends Fragment {
         availableDatesDP.setMinDate(System.currentTimeMillis() - 1000);
     }
 
+    //Get schedules of the cleaners
     public void getSchedules(Context context) {
         String type = "getSchedules";
         BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),

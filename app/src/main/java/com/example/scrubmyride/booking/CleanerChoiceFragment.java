@@ -138,6 +138,7 @@ public class CleanerChoiceFragment extends Fragment {
         });
     }
 
+    //Get a list of cleaners who have schedules on the date chosen by the user
     public void getCleaners(Context context) {
         String type = "getCleaners";
         BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity(),
@@ -196,6 +197,7 @@ public class CleanerChoiceFragment extends Fragment {
         backgroundWorker.execute(type, selectedDateStart, selectedDateEnd, washTypeID);
     }
 
+    //Using the start and end hours for each cleaner, put these hours into a 15 minute incremental list and format them into a readable string
     public void getHours(Context context) {
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
